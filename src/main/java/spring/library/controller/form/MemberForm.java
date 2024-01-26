@@ -9,7 +9,7 @@ public class MemberForm {
 
     private String name;
 
-    private Long idNumber;
+    private Long memberId;
 
     private String feature;
 
