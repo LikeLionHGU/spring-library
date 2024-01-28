@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.library.dto.request.BookRequest;
 
 @Entity
 @Builder
@@ -26,7 +27,7 @@ public class Book extends BaseEntity{
     private String publisher;
 
     @Column(nullable = false)
-    private String publishYear;
+    private int publicationYear;
 
     @Column(nullable = false)
     private String classification;
@@ -36,4 +37,30 @@ public class Book extends BaseEntity{
 
     @Column(nullable = false)
     private int amount;
+
+    public static Book toBook(BookRequest bookRequest) {
+        return Book.builder()
+                .title(bookRequest.getTitle())
+                .author(bookRequest.getAuthor())
+                .publisher(bookRequest.getPublisher())
+                .publicationYear(bookRequest.getPublicationYear())
+                .classification(bookRequest.getClassification())
+                .status(bookRequest.isStatus())
+                .amount(bookRequest.getAmount())
+                .build();
+    }
+
+    public void update(BookRequest bookRequest) {
+        this.title = bookRequest.getTitle();
+        this.author = bookRequest.getAuthor();
+        this.publisher = bookRequest.getPublisher();
+        this.publicationYear = bookRequest.getPublicationYear();
+        this.classification = bookRequest.getClassification();
+        this.status = bookRequest.isStatus();
+        this.amount = bookRequest.getAmount();
+    }
+
+    public void update(int amount){
+        this.amount = amount;
+    }
 }
