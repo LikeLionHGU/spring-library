@@ -25,6 +25,9 @@ public class Checkout {
     @Column(nullable = false)
     private int renewalCount;
 
+    @Column(nullable = false)
+    private boolean isReturned;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private Member member;
