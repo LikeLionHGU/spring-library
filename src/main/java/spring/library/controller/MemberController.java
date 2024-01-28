@@ -9,7 +9,10 @@ import spring.library.controller.form.MemberForm;
 import spring.library.dto.request.MemberRequest;
 import spring.library.dto.response.ApiResponse;
 import spring.library.dto.response.MemberIdResponse;
+import spring.library.dto.response.MemberListResponse;
 import spring.library.service.MemberService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -20,8 +23,24 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<ApiResponse> createMember(@RequestBody MemberForm form){
-        System.out.println("MemberController.createMember");
         Long memberId = memberService.createMember(MemberRequest.from(form));
+        ApiResponse response = new MemberIdResponse(memberId);
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping
+    public ResponseEntity<MemberListResponse> getMemberList() {
+        MemberListResponse memberListResponse = memberService.getMemberList();
+        return ResponseEntity.ok(memberListResponse);
+    }
+    @PutMapping("/{memberId}")
+    public ResponseEntity<ApiResponse> updateMember(@PathVariable Long memberId, @RequestBody MemberForm form){
+        memberService.updateMember(memberId, MemberRequest.from(form));
+        ApiResponse response = new MemberIdResponse(memberId);
+        return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity<ApiResponse> deleteMember(@PathVariable Long memberId){
+        memberService.deleteMember(memberId);
         ApiResponse response = new MemberIdResponse(memberId);
         return ResponseEntity.ok(response);
     }

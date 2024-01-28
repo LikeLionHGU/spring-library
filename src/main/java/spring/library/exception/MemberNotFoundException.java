@@ -2,6 +2,6 @@ package spring.library.exception;
 
 public class MemberNotFoundException extends RuntimeException{
     public MemberNotFoundException() {
-        super("[ERROR] 멤버를 발견하지 못했습니다.");
+        super("존재하지 않는 회원입니다.");
     }
 }

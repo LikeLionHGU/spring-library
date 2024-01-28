@@ -1,7 +1,7 @@
 package spring.library.exception;
 
 public class DuplicateMemberException extends RuntimeException {
-    public DuplicateMemberException(String message) {
-        super(message);
+    public DuplicateMemberException() {
+        super("이미 존재하는 회원입니다.");
     }
 }

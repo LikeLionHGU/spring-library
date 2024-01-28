@@ -32,12 +32,12 @@ public class Member extends BaseEntity{
     @Column(nullable = false)
     private String phoneNumber;
 
-    public void update(String name, String email, String idNumber, Feature feature, String phoneNumber) {
-        this.name = name;
-        this.email = email;
-        this.idNumber = idNumber;
-        this.feature = feature;
-        this.phoneNumber = phoneNumber;
+    public void update(MemberRequest memberRequest) {
+        this.name = memberRequest.getName();
+        this.email = memberRequest.getEmail();
+        this.idNumber = memberRequest.getIdNumber();
+        this.feature = memberRequest.getFeature();
+        this.phoneNumber = memberRequest.getPhoneNumber();
     }
 
     public static Member toMember(MemberRequest memberRequest) {
