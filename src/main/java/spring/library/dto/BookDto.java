@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.library.controller.form.BorrowBookForm;
+import spring.library.controller.form.BookForm;
 import spring.library.domain.Book;
 
 @Builder
@@ -25,7 +25,7 @@ public class BookDto {
   private String status;
   private int amount;
 
-  public static BookDto from(BorrowBookForm borrowBookForm) {
+  public static BookDto from(BookForm borrowBookForm) {
     return BookDto.builder()
         .bookId(borrowBookForm.getBookId())
         .title(borrowBookForm.getTitle())

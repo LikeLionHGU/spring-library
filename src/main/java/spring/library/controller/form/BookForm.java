@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class BorrowBookForm {
+public class BookForm {
 
   private Long bookId;
   private String title;
