@@ -23,7 +23,7 @@ public class Book {
   private String status;
   private int amount;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name="memeberId")
   private Member member;
 }

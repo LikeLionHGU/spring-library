@@ -1,6 +1,5 @@
 package spring.library.domain;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -15,7 +14,6 @@ import java.time.LocalDateTime;
 @EntityListeners(AudioFileFormat.class)
 public class BorrowTime {
 
-    @CreatedDate private LocalDateTime borrowTime;
-    @LastModifiedDate private LocalDateTime extendDue;
-
+  @CreatedDate private LocalDateTime borrowTime;
+  @LastModifiedDate private LocalDateTime extendDue;
 }
