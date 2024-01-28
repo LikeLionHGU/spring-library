@@ -45,4 +45,12 @@ public class Member extends BaseTime{
                 .phoneNumber(memberDto.getPhoneNumber())
                 .build();
     }
+
+    public void updateAll(MemberDto memberDto) {
+        this.name = memberDto.getName();
+        this.idNumber = memberDto.getIdNumber();
+        this.feature = MemberFeature.from(memberDto.getFeature());
+        this.email = memberDto.getEmail();
+        this.phoneNumber = memberDto.getPhoneNumber();
+    }
 }

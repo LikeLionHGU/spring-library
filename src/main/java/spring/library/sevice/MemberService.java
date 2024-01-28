@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import spring.library.domain.Member;
 import spring.library.dto.MemberDto;
 import spring.library.exception.IdNumberAlreadyExistsException;
+import spring.library.exception.MemberIdPresenceException;
 import spring.library.repository.MemberRepository;
 
 import java.util.List;
@@ -18,10 +19,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public void registerMember(MemberDto memberDto) {
-        memberRepository.findByIdNumber(memberDto.getIdNumber())
-                .ifPresent(member -> {
-                    throw new IdNumberAlreadyExistsException();
-                });
+        validateIdNumberDuplication(memberDto.getIdNumber());
         memberRepository.save(Member.from(memberDto));
     }
 
@@ -29,5 +27,18 @@ public class MemberService {
         return memberRepository.findAll().stream()
                 .map(MemberDto::from)
                 .toList();
+    }
+
+    public void updateMember(Long memberId, MemberDto memberDto) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(MemberIdPresenceException::new);
+        member.updateAll(memberDto);
+    }
+
+    private void validateIdNumberDuplication(String idNumber) {
+        memberRepository.findByIdNumber(idNumber)
+                .ifPresent(member -> {
+                    throw new IdNumberAlreadyExistsException();
+                });
     }
 }

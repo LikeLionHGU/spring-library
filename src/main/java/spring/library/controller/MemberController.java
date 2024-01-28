@@ -2,10 +2,7 @@ package spring.library.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.library.controller.request.MemberRegisterRequest;
 import spring.library.controller.response.MemberListResponse;
 import spring.library.dto.MemberDto;
@@ -27,5 +24,12 @@ public class MemberController {
     @GetMapping("/members")
     public ResponseEntity<MemberListResponse> getMembers(){
         return ResponseEntity.ok(new MemberListResponse(memberService.getMembers()));
+    }
+
+    @PutMapping("/members/{memberId}")
+    public void updateMember(@PathVariable Long memberId, @RequestBody MemberRegisterRequest memberRegisterRequest){
+
+        MemberDto memberDto = MemberDto.from(memberRegisterRequest);
+        memberService.updateMember(memberId, memberDto);
     }
 }
