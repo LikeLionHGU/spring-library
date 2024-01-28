@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import spring.library.domain.Member;
 import spring.library.dto.request.MemberRequest;
-import spring.library.dto.response.MemberListResponse;
+import spring.library.dto.response.member.MemberListResponse;
 import spring.library.exception.DuplicateMemberException;
 import spring.library.exception.MemberNotFoundException;
 import spring.library.repository.MemberRepository;

@@ -1,4 +1,4 @@
-package spring.library.dto.response;
+package spring.library.dto.response.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
