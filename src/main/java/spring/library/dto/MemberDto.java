@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.library.controller.request.BookCheckoutRequest;
 import spring.library.controller.request.MemberRegisterRequest;
 import spring.library.domain.Member;
 
@@ -37,6 +38,12 @@ public class MemberDto {
                 .feature(member.getFeature().getFeature())
                 .email(member.getEmail())
                 .phoneNumber(member.getPhoneNumber())
+                .build();
+    }
+
+    public static MemberDto from(BookCheckoutRequest bookCheckoutRequest){
+        return MemberDto.builder()
+                .memberId(bookCheckoutRequest.getMemberId())
                 .build();
     }
 }

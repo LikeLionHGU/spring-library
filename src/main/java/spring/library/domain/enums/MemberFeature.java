@@ -5,14 +5,16 @@ import spring.library.exception.InvalidEnumValueException;
 
 @Getter
 public enum MemberFeature {
-    STUDENT("학생"),
-    Faculty("교직원"),
-    ADMIN("관리자");
+    STUDENT("학생",10),
+    Faculty("교직원",30),
+    ADMIN("관리자",110813);
 
     private final String feature;
+    private final int borrowLimit;
 
-    MemberFeature(String feature){
+    MemberFeature(String feature, int borrowLimit){
         this.feature = feature;
+        this.borrowLimit = borrowLimit;
     }
 
     public static MemberFeature from(String feature){

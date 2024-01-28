@@ -1,9 +1,18 @@
 package spring.library.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
 public class CheckoutList extends BaseTime{
 
     @Id
@@ -25,8 +34,19 @@ public class CheckoutList extends BaseTime{
     private LocalDate dueDate;
 
     @Column(name = "renewal_count", nullable = false)
-    private int renewalCount=1;
+    private int renewalCount;
 
     @Column(name = "is_returned", nullable = false)
     private boolean isReturned;
+
+    public static CheckoutList from(Member member, Book book){
+        return CheckoutList.builder()
+                .member(member)
+                .book(book)
+                .loanDate(LocalDate.now())
+                .dueDate(LocalDate.now().plusDays(member.getFeature().getBorrowLimit()))
+                .renewalCount(0)
+                .isReturned(false)
+                .build();
+    }
 }
