@@ -1,6 +1,7 @@
 package spring.library.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.library.controller.request.MemberRegisterRequest;
@@ -15,8 +16,9 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/members")
-    public void signup(@RequestBody MemberRegisterRequest memberRegisterRequest) {
+    public ResponseEntity<Void> registerMember(@RequestBody MemberRegisterRequest memberRegisterRequest) {
         memberService.registerMember(MemberDto.from(memberRegisterRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/members")
