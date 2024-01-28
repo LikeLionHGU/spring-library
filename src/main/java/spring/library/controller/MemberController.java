@@ -16,9 +16,7 @@ public class MemberController {
 
     @PostMapping("/members")
     public void signup(@RequestBody MemberRegisterRequest memberRegisterRequest) {
-        System.out.println("memberRegisterRequest = " + memberRegisterRequest);
-        MemberDto memberDto = MemberDto.from(memberRegisterRequest);
-        memberService.registerMember(memberDto);
+        memberService.registerMember(MemberDto.from(memberRegisterRequest));
     }
 
     @GetMapping("/members")
@@ -28,8 +26,7 @@ public class MemberController {
 
     @PutMapping("/members/{memberId}")
     public void updateMember(@PathVariable Long memberId, @RequestBody MemberRegisterRequest memberRegisterRequest){
-        MemberDto memberDto = MemberDto.from(memberRegisterRequest);
-        memberService.updateMember(memberId, memberDto);
+        memberService.updateMember(memberId, MemberDto.from(memberRegisterRequest));
     }
 
     @DeleteMapping("/members/{memberId}")
