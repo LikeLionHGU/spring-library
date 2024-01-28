@@ -1,6 +1,7 @@
 package spring.library.domain.enums;
 
 import lombok.Getter;
+import spring.library.exception.InvalidEnumValueException;
 
 @Getter
 public enum BookStatus {
@@ -13,12 +14,12 @@ public enum BookStatus {
         this.status = status;
     }
 
-    public static BookStatus getBookStatus(String status){
-        for(BookStatus bookStatus : BookStatus.values()){
-            if(bookStatus.getStatus().equals(status)){
+    public static BookStatus from(String status) {
+        for (BookStatus bookStatus : BookStatus.values()) {
+            if (bookStatus.getStatus().equals(status)) {
                 return bookStatus;
             }
         }
-        return null;
+        throw new InvalidEnumValueException("존재하지 않는 도서 상태입니다.");
     }
 }

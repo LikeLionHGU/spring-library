@@ -21,13 +21,12 @@ public enum BookClassification {
     BookClassification(String classification){
         this.classification = classification;
     }
-
-    public static BookClassification getBookClassification(String classification){
-        for(BookClassification bookClassification : BookClassification.values()){
-            if(bookClassification.getClassification().equals(classification)){
+    public static BookClassification from(String classification) {
+        for (BookClassification bookClassification : BookClassification.values()) {
+            if (bookClassification.getClassification().equals(classification)) {
                 return bookClassification;
             }
         }
-        return null;
+        return ETC;
     }
 }

@@ -1,10 +1,19 @@
 package spring.library.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import spring.library.domain.enums.BookClassification;
 import spring.library.domain.enums.BookStatus;
+import spring.library.dto.BookDto;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
 public class Book extends BaseTime{
 
     @Id
@@ -26,7 +35,7 @@ public class Book extends BaseTime{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "classification", nullable = false)
-    private BookClassification bookClassification=BookClassification.ETC;
+    private BookClassification classification=BookClassification.ETC;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -34,4 +43,20 @@ public class Book extends BaseTime{
 
     @Column(name = "amount", nullable = false)
     private int amount;
+
+    public static Book from(BookDto bookDto){
+        return Book.builder()
+                .title(bookDto.getTitle())
+                .author(bookDto.getAuthor())
+                .publisher(bookDto.getPublisher())
+                .publicationYear(bookDto.getPublicationYear())
+                .classification(BookClassification.from(bookDto.getClassification()))
+                .status(BookStatus.from(bookDto.getStatus()))
+                .amount(bookDto.getAmount())
+                .build();
+    }
+
+    public void addAmount(int amount) {
+        this.amount += amount;
+    }
 }
