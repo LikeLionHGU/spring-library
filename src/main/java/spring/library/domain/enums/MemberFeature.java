@@ -1,6 +1,7 @@
 package spring.library.domain.enums;
 
 import lombok.Getter;
+import spring.library.exception.InvalidEnumValueException;
 
 @Getter
 public enum MemberFeature {
@@ -13,12 +14,13 @@ public enum MemberFeature {
         this.feature = feature;
     }
 
-    public static MemberFeature getMemberFeature(String feature){
-        for(MemberFeature memberFeature : MemberFeature.values()){
-            if(memberFeature.getFeature().equals(feature)){
-                return memberFeature;
-            }
+    public static MemberFeature from(String feature){
+        if(feature.equals("학생")){
+            return STUDENT;
+        }else if(feature.equals("관리자")){
+            return ADMIN;
+        }else{
+            throw new InvalidEnumValueException("유효하지 않은 회원 유형입니다.");
         }
-        return null;
     }
 }

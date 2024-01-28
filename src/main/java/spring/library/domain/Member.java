@@ -1,9 +1,16 @@
 package spring.library.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import spring.library.domain.enums.MemberFeature;
+import spring.library.dto.MemberDto;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Member extends BaseTime{
 
     @Id
@@ -26,4 +33,14 @@ public class Member extends BaseTime{
 
     @Column(name = "phone_number", length = 30, nullable = false)
     private String phoneNumber;
+
+    public static Member from(MemberDto memberDto){
+        return Member.builder()
+                .name(memberDto.getName())
+                .idNumber(memberDto.getIdNumber())
+                .feature(MemberFeature.from(memberDto.getFeature()))
+                .email(memberDto.getEmail())
+                .phoneNumber(memberDto.getPhoneNumber())
+                .build();
+    }
 }
