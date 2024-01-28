@@ -41,4 +41,14 @@ public class MemberService {
                     throw new IdNumberAlreadyExistsException();
                 });
     }
+
+    public void deleteMember(Long memberId) {
+        ValidateIdPresence(memberId);
+        memberRepository.deleteById(memberId);
+    }
+
+    public void ValidateIdPresence(Long memberId){
+        memberRepository.findById(memberId)
+                .orElseThrow(MemberIdPresenceException::new);
+    }
 }

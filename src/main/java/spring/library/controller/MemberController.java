@@ -28,8 +28,12 @@ public class MemberController {
 
     @PutMapping("/members/{memberId}")
     public void updateMember(@PathVariable Long memberId, @RequestBody MemberRegisterRequest memberRegisterRequest){
-
         MemberDto memberDto = MemberDto.from(memberRegisterRequest);
         memberService.updateMember(memberId, memberDto);
+    }
+
+    @DeleteMapping("/members/{memberId}")
+    public void deleteMember(@PathVariable Long memberId){
+        memberService.deleteMember(memberId);
     }
 }
