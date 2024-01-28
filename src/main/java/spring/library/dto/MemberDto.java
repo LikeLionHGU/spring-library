@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import spring.library.controller.request.MemberRegisterRequest;
+import spring.library.domain.Member;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +26,17 @@ public class MemberDto {
                 .feature(memberRegisterRequest.getFeature())
                 .email(memberRegisterRequest.getEmail())
                 .phoneNumber(memberRegisterRequest.getPhoneNumber())
+                .build();
+    }
+
+    public static MemberDto from(Member member){
+        return MemberDto.builder()
+                .memberId(member.getMemberId())
+                .name(member.getName())
+                .idNumber(member.getIdNumber())
+                .feature(member.getFeature().getFeature())
+                .email(member.getEmail())
+                .phoneNumber(member.getPhoneNumber())
                 .build();
     }
 }

@@ -3,6 +3,7 @@ package spring.library.domain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import spring.library.domain.enums.MemberFeature;
 import spring.library.dto.MemberDto;
@@ -11,6 +12,7 @@ import spring.library.dto.MemberDto;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 public class Member extends BaseTime{
 
     @Id

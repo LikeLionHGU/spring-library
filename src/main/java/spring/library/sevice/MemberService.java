@@ -8,6 +8,8 @@ import spring.library.dto.MemberDto;
 import spring.library.exception.IdNumberAlreadyExistsException;
 import spring.library.repository.MemberRepository;
 
+import java.util.List;
+
 @Transactional
 @Service
 @RequiredArgsConstructor
@@ -21,5 +23,11 @@ public class MemberService {
                     throw new IdNumberAlreadyExistsException();
                 });
         memberRepository.save(Member.from(memberDto));
+    }
+
+    public List<MemberDto> getMembers() {
+        return memberRepository.findAll().stream()
+                .map(MemberDto::from)
+                .toList();
     }
 }
