@@ -8,6 +8,7 @@ import spring.library.domain.enums.BookClassification;
 import spring.library.domain.enums.BookStatus;
 import spring.library.dto.BookDto;
 import spring.library.repository.BookRepository;
+import spring.library.exception.IdPresenceException;
 
 import java.util.List;
 
@@ -35,5 +36,15 @@ public class BookService {
         return bookRepository.findAll().stream()
                 .map(BookDto::from)
                 .toList();
+    }
+
+    public void deleteBook(Long bookId) {
+        ValidateIdPresence(bookId);
+        bookRepository.deleteById(bookId);
+    }
+
+    private void ValidateIdPresence(Long bookId){
+        bookRepository.findById(bookId)
+                .orElseThrow(IdPresenceException::new);
     }
 }

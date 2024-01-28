@@ -23,7 +23,6 @@ public class BookListResponse {
     @AllArgsConstructor
     @Builder
     private static class Book{
-        private Long bookId;
         private String title;
         private String author;
         private String publisher;

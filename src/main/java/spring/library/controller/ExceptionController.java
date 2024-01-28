@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import spring.library.controller.response.ExceptionResponse;
 import spring.library.exception.IdNumberAlreadyExistsException;
 import spring.library.exception.InvalidEnumValueException;
-import spring.library.exception.MemberIdPresenceException;
+import spring.library.exception.IdPresenceException;
 
 @RestControllerAdvice
 public class ExceptionController {
@@ -30,8 +30,8 @@ public class ExceptionController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
-    @ExceptionHandler(MemberIdPresenceException.class)
-    public ResponseEntity<ExceptionResponse> handleMemberIdPresenceException(MemberIdPresenceException e) {
+    @ExceptionHandler(IdPresenceException.class)
+    public ResponseEntity<ExceptionResponse> handleMemberIdPresenceException(IdPresenceException e) {
         ExceptionResponse response = ExceptionResponse.builder()
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message(e.getMessage())

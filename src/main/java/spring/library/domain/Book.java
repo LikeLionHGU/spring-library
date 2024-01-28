@@ -35,7 +35,7 @@ public class Book extends BaseTime{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "classification", nullable = false)
-    private BookClassification classification=BookClassification.ETC;
+    private BookClassification classification;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -51,7 +51,7 @@ public class Book extends BaseTime{
                 .publisher(bookDto.getPublisher())
                 .publicationYear(bookDto.getPublicationYear())
                 .classification(BookClassification.from(bookDto.getClassification()))
-                .status(BookStatus.from(bookDto.getStatus()))
+                .status(BookStatus.AVAILABLE)
                 .amount(bookDto.getAmount())
                 .build();
     }
