@@ -31,13 +31,16 @@ public class Book {
   @JoinColumn(name="memeberId")
   private Member member;
 
-  public static Book toBook(BookDto bookDto, Member member){
-    return Book.builder().title(bookDto.getTitle()).content(bookDto.getContent())
-            .author(bookDto.getAuthor()).publisher(bookDto.getPublisher())
-            .publicationYear(bookDto.getPublicationYear())
-            .classification(bookDto.getClassification())
-            .status(bookDto.getStatus())
-            .amount(builder().amount)
-            .build();
+  public static Book toBook(BookDto bookDto){
+    return Book.builder()
+        .title(bookDto.getTitle())
+        .content(bookDto.getContent())
+        .author(bookDto.getAuthor())
+        .publisher(bookDto.getPublisher())
+        .publicationYear(bookDto.getPublicationYear())
+        .classification(bookDto.getClassification())
+        .status(bookDto.getStatus())
+        .amount(bookDto.getAmount())
+        .build();
     }
   }

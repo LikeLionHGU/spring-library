@@ -15,7 +15,7 @@ import spring.library.service.BookService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/books")
 @RequiredArgsConstructor
 @CrossOrigin
 public class BookInfoController {
@@ -28,6 +28,7 @@ public class BookInfoController {
         ApiResponse response = new BookIdResponse(bookId);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/{bookId}")
     public ResponseEntity<ApiResponse> getBook(@PathVariable Long bookId){
         BookDto bookDto = bookService.getBook(bookId);

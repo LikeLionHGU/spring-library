@@ -25,16 +25,16 @@ public class BookDto {
   private String status;
   private int amount;
 
-  public static BookDto from(BookForm borrowBookForm) {
+  public static BookDto from(BookForm bookForm) {
     return BookDto.builder()
-        .bookId(borrowBookForm.getBookId())
-        .title(borrowBookForm.getTitle())
-        .author(borrowBookForm.getAuthor())
-        .publisher(borrowBookForm.getPublisher())
-        .publicationYear(borrowBookForm.getPublicationYear())
-        .classification(borrowBookForm.getClassification())
-        .status(borrowBookForm.getStatus())
-        .amount(borrowBookForm.getAmount())
+        .bookId(bookForm.getBookId())
+        .title(bookForm.getTitle())
+        .author(bookForm.getAuthor())
+        .publisher(bookForm.getPublisher())
+        .publicationYear(bookForm.getPublicationYear())
+        .classification(bookForm.getClassification())
+        .status(bookForm.getStatus())
+        .amount(bookForm.getAmount())
         .build();
   }
 

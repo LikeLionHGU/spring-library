@@ -4,7 +4,7 @@ import spring.library.dto.BookDto;
 
 public class BookResponse extends ApiResponse {
 
-
+    private Long bookId;
     private String title;
 
     private String content;
@@ -17,6 +17,7 @@ public class BookResponse extends ApiResponse {
 
 
     public BookResponse(BookDto bookDto) {
+        this.bookId=bookDto.getBookId();
         this.title =bookDto.getTitle();
         this.content = bookDto.getContent();
         this.author = bookDto.getAuthor();

@@ -9,7 +9,6 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class BookListResponse extends ApiResponse {
 
     private List<BookDto> books;
