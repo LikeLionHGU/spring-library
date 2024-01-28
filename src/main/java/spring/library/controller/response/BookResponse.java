@@ -2,7 +2,7 @@ package spring.library.controller.response;
 
 import spring.library.dto.BookDto;
 
-public class BookResponse {
+public class BookResponse extends ApiResponse {
 
 
     private String title;

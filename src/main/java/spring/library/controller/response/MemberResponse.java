@@ -7,7 +7,7 @@ import spring.library.dto.MemberDto;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberResponse {
+public class MemberResponse extends ApiResponse {
 
     private String name;
     private String feature;

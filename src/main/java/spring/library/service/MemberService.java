@@ -7,6 +7,8 @@ import spring.library.dto.MemberDto;
 import spring.library.exception.MemberNotFoundException;
 import spring.library.repository.MemberRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -18,13 +20,18 @@ public class MemberService {
         return member.getMemberId();
     }
 
-    public MemberDto getMemberInfo(String memberName) {
-        System.out.println("memberId = " + memberName);
+    public MemberDto getMemberInfo(Long memberId) {
         Member member =
                 memberRepository
-                        .findByUsername(memberName)
+                        .findById(memberId)
                         .orElseThrow(MemberNotFoundException::new);
         return MemberDto.from(member);
+    }
+
+    public List<MemberDto> getAllMembers(){
+        List<Member> members = memberRepository.findAll();
+
+        return members.stream().map(MemberDto::from).toList();
     }
 
     public void deleteMember(Long memberId) {
