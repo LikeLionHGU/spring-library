@@ -9,6 +9,8 @@ import spring.library.domain.enums.BookStatus;
 import spring.library.dto.BookDto;
 import spring.library.repository.BookRepository;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -27,5 +29,11 @@ public class BookService {
                 .ifPresentOrElse(
                         book -> book.addAmount(bookDto.getAmount()),
                         () -> bookRepository.save(Book.from(bookDto)));
+    }
+
+    public List<BookDto> getBooks() {
+        return bookRepository.findAll().stream()
+                .map(BookDto::from)
+                .toList();
     }
 }

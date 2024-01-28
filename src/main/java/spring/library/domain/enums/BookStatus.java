@@ -6,7 +6,7 @@ import spring.library.exception.InvalidEnumValueException;
 @Getter
 public enum BookStatus {
     AVAILABLE("대출가능"),
-    UNAVAILABLE("대출불가능");
+    UNAVAILABLE("대출중");
 
     private final String status;
 

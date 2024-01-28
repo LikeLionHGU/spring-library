@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import spring.library.controller.request.BookRegisterRequest;
+import spring.library.domain.Book;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +30,19 @@ public class BookDto {
                 .classification(bookRegisterRequest.getClassification())
                 .status(bookRegisterRequest.getStatus())
                 .amount(bookRegisterRequest.getAmount())
+                .build();
+    }
+
+    public static BookDto from(Book book){
+        return BookDto.builder()
+                .bookId(book.getBookId())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .publisher(book.getPublisher())
+                .publicationYear(book.getPublicationYear())
+                .classification(book.getClassification().getClassification())
+                .status(book.getStatus().getStatus())
+                .amount(book.getAmount())
                 .build();
     }
 }
