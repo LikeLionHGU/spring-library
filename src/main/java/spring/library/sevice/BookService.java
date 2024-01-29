@@ -33,9 +33,8 @@ public class BookService {
     }
 
     private Book ValidateIdPresence(Long bookId){
-        return bookRepository.findById(bookId).orElseThrow(
-                IdPresenceException::new
-        );
+        return bookRepository.findById(bookId)
+                .orElseThrow(() -> new IdPresenceException("존재하지 않는 도서입니다."));
     }
 
     public void updateBook(Long bookId, BookDto bookDto) {

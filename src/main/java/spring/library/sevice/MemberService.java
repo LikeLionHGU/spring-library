@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import spring.library.domain.Member;
 import spring.library.dto.MemberDto;
 import spring.library.exception.IdNumberAlreadyExistsException;
+
 import spring.library.exception.IdPresenceException;
 import spring.library.repository.MemberRepository;
 
@@ -57,8 +58,7 @@ public class MemberService {
     }
 
     public Member ValidateIdPresence(Long memberId){
-        return memberRepository.findById(memberId).orElseThrow(
-                IdPresenceException::new
-        );
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new IdPresenceException("존재하지 않는 회원입니다."));
     }
 }

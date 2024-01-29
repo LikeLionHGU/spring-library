@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class BookCheckoutRequest {
+public class CheckoutRequest {
     private Long memberId;
 }

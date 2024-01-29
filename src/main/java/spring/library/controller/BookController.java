@@ -4,19 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring.library.controller.request.BookCheckoutRequest;
 import spring.library.controller.request.BookRegisterRequest;
 import spring.library.controller.response.BookListResponse;
 import spring.library.dto.BookDto;
 import spring.library.sevice.BookService;
-import spring.library.sevice.CheckoutListService;
 
 @RestController
 @RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;
-    private final CheckoutListService checkoutListService;
 
     @PostMapping("/books")
     public ResponseEntity<Void> registerBook(@RequestBody BookRegisterRequest bookRegisterRequest){
@@ -39,11 +36,5 @@ public class BookController {
     public ResponseEntity<Void> deleteBook(@PathVariable Long bookId){
         bookService.deleteBook(bookId);
         return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-    @PostMapping("/books/{bookId}/checkout")
-    public ResponseEntity<Void> checkoutBook(@PathVariable Long bookId, @RequestBody BookCheckoutRequest bookCheckoutRequest){
-        checkoutListService.checkoutBook(bookId, bookCheckoutRequest.getMemberId());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

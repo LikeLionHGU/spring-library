@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Getter
-public class CheckoutList extends BaseTime{
+public class Checkout extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +39,8 @@ public class CheckoutList extends BaseTime{
     @Column(name = "is_returned", nullable = false)
     private boolean isReturned;
 
-    public static CheckoutList from(Member member, Book book){
-        return CheckoutList.builder()
+    public static Checkout from(Member member, Book book){
+        return Checkout.builder()
                 .member(member)
                 .book(book)
                 .loanDate(LocalDate.now())

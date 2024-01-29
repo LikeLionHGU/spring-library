@@ -23,6 +23,7 @@ public class BookListResponse {
     @AllArgsConstructor
     @Builder
     private static class Book{
+        private Long bookId;
         private String title;
         private String author;
         private String publisher;
@@ -31,6 +32,7 @@ public class BookListResponse {
 
         public static Book from(BookDto bookDto){
             return Book.builder()
+                    .bookId(bookDto.getBookId())
                     .title(bookDto.getTitle())
                     .author(bookDto.getAuthor())
                     .publisher(bookDto.getPublisher())
