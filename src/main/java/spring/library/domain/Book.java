@@ -59,4 +59,12 @@ public class Book extends BaseTime{
     public void addAmount(int amount) {
         this.amount += amount;
     }
+
+    public void controlStatus(int size) {
+        if (size >= amount) {
+            this.status = BookStatus.UNAVAILABLE;
+        } else {
+            this.status = BookStatus.AVAILABLE;
+        }
+    }
 }
