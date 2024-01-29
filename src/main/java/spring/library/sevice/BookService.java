@@ -32,8 +32,14 @@ public class BookService {
         bookRepository.deleteById(bookId);
     }
 
-    private void ValidateIdPresence(Long bookId){
-        bookRepository.findById(bookId)
-                .orElseThrow(IdPresenceException::new);
+    private Book ValidateIdPresence(Long bookId){
+        return bookRepository.findById(bookId).orElseThrow(
+                IdPresenceException::new
+        );
+    }
+
+    public void updateBook(Long bookId, BookDto bookDto) {
+        Book book = ValidateIdPresence(bookId);
+        book.updateBookExceptStatus(bookDto);
     }
 }

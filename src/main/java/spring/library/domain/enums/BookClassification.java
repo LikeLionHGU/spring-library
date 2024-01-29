@@ -14,6 +14,8 @@ public enum BookClassification {
     SELFHELP("자기계발"),
     RELIGION("종교"),
     LANGUAGE("외국어"),
+    COMPUTER("컴퓨터"),
+    COOKING("요리"),
     ETC("기타");
 
     private final String classification;

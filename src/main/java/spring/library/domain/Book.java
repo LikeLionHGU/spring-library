@@ -3,7 +3,6 @@ package spring.library.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import spring.library.domain.enums.BookClassification;
-import spring.library.domain.enums.BookStatus;
 import spring.library.dto.BookDto;
 
 @Entity
@@ -35,10 +34,6 @@ public class Book extends BaseTime{
     @Column(name = "classification", nullable = false)
     private BookClassification classification;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private BookStatus status;
-
     public static Book from(BookDto bookDto){
         return Book.builder()
                 .title(bookDto.getTitle())
@@ -46,7 +41,14 @@ public class Book extends BaseTime{
                 .publisher(bookDto.getPublisher())
                 .publicationYear(bookDto.getPublicationYear())
                 .classification(BookClassification.from(bookDto.getClassification()))
-                .status(BookStatus.AVAILABLE)
                 .build();
+    }
+
+    public void updateBookExceptStatus(BookDto bookDto) {
+        this.title = bookDto.getTitle();
+        this.author = bookDto.getAuthor();
+        this.publisher = bookDto.getPublisher();
+        this.publicationYear = bookDto.getPublicationYear();
+        this.classification = BookClassification.from(bookDto.getClassification());
     }
 }

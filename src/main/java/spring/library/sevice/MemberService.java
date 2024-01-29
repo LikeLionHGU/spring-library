@@ -30,8 +30,7 @@ public class MemberService {
     }
 
     public void updateMember(Long memberId, MemberDto memberDto) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(IdPresenceException::new);
+        Member member = ValidateIdPresence(memberId);
         validateIdNumberDuplication(memberDto.getIdNumber(), memberId);
         member.updateAll(memberDto);
     }
@@ -57,8 +56,9 @@ public class MemberService {
         memberRepository.deleteById(memberId);
     }
 
-    public void ValidateIdPresence(Long memberId){
-        memberRepository.findById(memberId)
-                .orElseThrow(IdPresenceException::new);
+    public Member ValidateIdPresence(Long memberId){
+        return memberRepository.findById(memberId).orElseThrow(
+                IdPresenceException::new
+        );
     }
 }

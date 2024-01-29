@@ -18,7 +18,6 @@ public class BookDto {
     private String publisher;
     private int publicationYear;
     private String classification;
-    private String status;
 
     public static BookDto from(BookRegisterRequest bookRegisterRequest){
         return BookDto.builder()
@@ -38,7 +37,6 @@ public class BookDto {
                 .publisher(book.getPublisher())
                 .publicationYear(book.getPublicationYear())
                 .classification(book.getClassification().getClassification())
-                .status(book.getStatus().getStatus())
                 .build();
     }
 }

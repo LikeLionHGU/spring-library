@@ -29,6 +29,12 @@ public class BookController {
         return ResponseEntity.ok(new BookListResponse(bookService.getBooks()));
     }
 
+    @PutMapping("/books/{bookId}")
+    public ResponseEntity<Void> updateBook(@PathVariable Long bookId, @RequestBody BookRegisterRequest bookRegisterRequest){
+        bookService.updateBook(bookId, BookDto.from(bookRegisterRequest));
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     @DeleteMapping("/books/{bookId}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long bookId){
         bookService.deleteBook(bookId);
