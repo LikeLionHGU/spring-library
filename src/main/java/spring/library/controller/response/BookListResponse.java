@@ -29,7 +29,6 @@ public class BookListResponse {
         private int publicationYear;
         private String classification;
         private String status;
-        private int amount;
 
         public static Book from(BookDto bookDto){
             return Book.builder()
@@ -39,7 +38,6 @@ public class BookListResponse {
                     .publicationYear(bookDto.getPublicationYear())
                     .classification(bookDto.getClassification())
                     .status(bookDto.getStatus())
-                    .amount(bookDto.getAmount())
                     .build();
         }
     }

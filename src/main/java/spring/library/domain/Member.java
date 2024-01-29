@@ -23,8 +23,8 @@ public class Member extends BaseTime{
     @Column(name = "name", length = 30, nullable = false)
     private String name;
 
-    @Column(name = "id_number", length = 30, nullable = false)
-    private String idNumber;
+    @Column(name = "id_number", nullable = false)
+    private int idNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "feature", nullable = false)

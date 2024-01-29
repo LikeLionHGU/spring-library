@@ -36,7 +36,7 @@ public class MemberService {
         member.updateAll(memberDto);
     }
 
-    private void validateIdNumberDuplication(String idNumber, Long memberId) {
+    private void validateIdNumberDuplication(int idNumber, Long memberId) {
         memberRepository.findByIdNumber(idNumber)
                 .ifPresent(member -> {
                     if (!member.getMemberId().equals(memberId)) {
@@ -45,7 +45,7 @@ public class MemberService {
                 });
     }
 
-    private void validateIdNumberDuplication(String idNumber) {
+    private void validateIdNumberDuplication(int idNumber) {
         memberRepository.findByIdNumber(idNumber)
                 .ifPresent(member -> {
                     throw new IdNumberAlreadyExistsException();

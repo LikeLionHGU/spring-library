@@ -15,7 +15,7 @@ import spring.library.domain.Member;
 public class MemberDto {
     private Long memberId;
     private String name;
-    private String idNumber;
+    private int idNumber;
     private String feature;
     private String email;
     private String phoneNumber;

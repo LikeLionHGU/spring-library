@@ -7,7 +7,6 @@ import spring.library.domain.Book;
 import spring.library.domain.CheckoutList;
 import spring.library.domain.Member;
 import spring.library.domain.enums.BookStatus;
-import spring.library.exception.BookIsUnavailableException;
 import spring.library.exception.IdPresenceException;
 import spring.library.repository.BookRepository;
 import spring.library.repository.CheckoutListRepository;
@@ -29,14 +28,7 @@ public class CheckoutListService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 IdPresenceException::new
         );
-        controlBookStatus(book);
+        book.setStatus(BookStatus.UNAVAILABLE);
         checkoutListRepository.save(CheckoutList.from(member, book));
-    }
-
-    private void controlBookStatus(Book book) {
-        if (!book.getStatus().equals(BookStatus.AVAILABLE)) {
-            throw new BookIsUnavailableException();
-        }
-        book.controlStatus(checkoutListRepository.findAllByBook(book).size());
     }
 }

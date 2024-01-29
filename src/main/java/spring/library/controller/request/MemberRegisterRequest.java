@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberRegisterRequest {
     private String name;
-    private String idNumber;
+    private int idNumber;
     private String feature;
     private String email;
     private String phoneNumber;

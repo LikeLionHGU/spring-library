@@ -26,7 +26,7 @@ public class MemberListResponse {
     private static class Member{
         private Long memberId;
         private String name;
-        private String idNumber;
+        private int idNumber;
         private String feature;
         private String email;
         private String phoneNumber;

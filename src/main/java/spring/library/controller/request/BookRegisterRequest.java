@@ -11,6 +11,4 @@ public class BookRegisterRequest {
     private String publisher;
     private int publicationYear;
     private String classification;
-    private String status;
-    private int amount;
 }
