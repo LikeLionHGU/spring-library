@@ -5,14 +5,13 @@ import jakarta.persistence.criteria.Fetch;
 import lombok.*;
 import spring.library.dto.MemberDto;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member extends BorrowTime {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,9 +7,11 @@ import spring.library.domain.Member;
 import spring.library.dto.BookDto;
 import spring.library.dto.MemberDto;
 import spring.library.exception.BorrowUnable;
+import spring.library.exception.ReturnUnable;
 import spring.library.repository.BookRepository;
 import spring.library.repository.MemberRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,8 +53,12 @@ public class CheckoutService {
 
     if (bookDto.getStatus().equals("대출가능") && member.getNumberBooks() < borrowMaxNum) {
       book.get().setMember(member);
-      //        book.get().set+ 며칠 시간 해야하는데 왜 없지
+
+//      bookDto.setBorrowDate(LocalDate.now());
+//      bookDto.setExtendDue(LocalDate.now().plusDays(duration));
+
       member.setNumberBooks(member.getNumberBooks() + 1);
+      book.get().setStatus("대출중");
       bookRepository.save(book.get());
       memberRepository.save(member);
     } else {
@@ -78,9 +84,26 @@ public class CheckoutService {
   // To-Do
   // 3. 반납
   //  1) 대출 중인지 확인
-  //  2) 반납 후 빌린 책 --
+  //  2) 반납 후 빌린 책 -- /  상태 = 대출가능
+
+  public void returnBook(MemberDto memberDto, BookDto bookDto) {
+    Member member = memberRepository.findByFeature(memberDto.getMemberId());
+    Optional<Book> book = bookRepository.findById(bookDto.getBookId());
 
 
+
+    if (bookDto.getStatus().equals("대출중")) {
+        book.get().setMember(null);
+
+
+      member.setNumberBooks(member.getNumberBooks() - 1);
+      book.get().setStatus("대출중");
+      bookRepository.save(book.get());
+      memberRepository.save(member);
+    } else {
+      throw new ReturnUnable();
+    }
+  }
 
 
   // To-Do

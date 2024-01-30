@@ -43,5 +43,15 @@ public class CheckoutController {
   }
 
 
+  @PatchMapping("/{checkOutId}/return")
+  public ResponseEntity<ApiResponse> returnBook(@PathVariable Long checkOutId, @RequestBody MemberForm memberForm){
+    BookDto bookDto = bookService.getBook(checkOutId);
+    MemberDto memberDto =memberService.getMemberInfo(memberForm.getMemberId());
+    checkoutService.returnBook(memberDto,bookDto);
+    ApiResponse response = new ReturnResponse();
+    return  ResponseEntity.ok(response);
+  }
+
+
 }
 

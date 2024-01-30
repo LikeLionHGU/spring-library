@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.sound.sampled.AudioFileFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,6 +15,6 @@ import java.time.LocalDateTime;
 @EntityListeners(AudioFileFormat.class)
 public class BorrowTime {
 
-  @CreatedDate private LocalDateTime borrowTime;
-  @LastModifiedDate private LocalDateTime extendDue;
+  @CreatedDate private LocalDate borrowDate;
+  @LastModifiedDate private LocalDate extendDue;
 }

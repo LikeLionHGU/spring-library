@@ -1,14 +1,15 @@
 package spring.library.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import spring.library.controller.form.BookForm;
 import spring.library.domain.Book;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookDto {
@@ -23,6 +24,9 @@ public class BookDto {
   private String classification;
   private String status;
   private int amount;
+
+  private LocalDate borrowDate;
+  private LocalDate extendDue;
 
   public static BookDto from(BookForm bookForm) {
     return BookDto.builder()
@@ -47,7 +51,8 @@ public class BookDto {
                 .classification(book.getClassification())
                 .status(book.getStatus())
                 .amount(book.getAmount())
-                .build();
+                .borrowDate(book.getBorrowDate())
+              .build();
     }
 
 }

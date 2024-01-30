@@ -23,10 +23,7 @@ public class BookService {
 
 
     public Long addBook(BookDto bookDto){
-//        Member member = memberRepository.findById(bookDto.getBookId()).orElseThrow(MemberNotFoundException::new);
         Book book = bookRepository.save(Book.toBook(bookDto));
-//        Book book = bookRepository.save(Book.toBook(bookDto,member));
-
         return book.getBookId();
     }
 
