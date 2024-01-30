@@ -30,4 +30,9 @@ public class CheckoutController {
         return ResponseEntity.ok(new CheckoutHistoryListResponse(checkoutService.getCheckoutsHistory(memberId)));
     }
 
+    @PatchMapping("/checkouts/{checkoutId}/return")
+    public ResponseEntity<Void> returnBook(@PathVariable Long checkoutId){
+        checkoutService.returnBook(checkoutId);
+        return ResponseEntity.ok().build();
+    }
 }

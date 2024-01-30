@@ -5,10 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import spring.library.controller.response.ExceptionResponse;
-import spring.library.exception.BookIsUnavailableException;
-import spring.library.exception.IdNumberAlreadyExistsException;
-import spring.library.exception.InvalidEnumValueException;
-import spring.library.exception.IdPresenceException;
+import spring.library.exception.*;
 
 @RestControllerAdvice
 public class ExceptionController {
@@ -42,6 +39,15 @@ public class ExceptionController {
 
     @ExceptionHandler(BookIsUnavailableException.class)
     public ResponseEntity<ExceptionResponse> handleBookIsUnavailableException(BookIsUnavailableException e) {
+        ExceptionResponse response = ExceptionResponse.builder()
+                .error(HttpStatus.CONFLICT.getReasonPhrase())
+                .message(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
+    @ExceptionHandler(BookIsAlreadyReturnedException.class)
+    public ResponseEntity<ExceptionResponse> handleCheckoutHistoryListResponse(BookIsAlreadyReturnedException e) {
         ExceptionResponse response = ExceptionResponse.builder()
                 .error(HttpStatus.CONFLICT.getReasonPhrase())
                 .message(e.getMessage())

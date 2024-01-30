@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.library.exception.BookIsAlreadyReturnedException;
 
 import java.time.LocalDate;
 
@@ -48,5 +49,16 @@ public class Checkout extends BaseTime{
                 .renewalCount(0)
                 .isReturned(false)
                 .build();
+    }
+
+    public void returnBook() {
+        validateIsReturned();
+        this.isReturned = true;
+    }
+
+    private void validateIsReturned() {
+        if (this.isReturned) {
+            throw new BookIsAlreadyReturnedException();
+        }
     }
 }

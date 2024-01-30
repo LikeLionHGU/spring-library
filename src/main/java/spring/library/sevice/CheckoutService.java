@@ -62,4 +62,14 @@ public class CheckoutService {
                 .map(CheckoutDto::from)
                 .toList();
     }
+
+    public void returnBook(Long checkoutId) {
+        Checkout checkout = ValidateCheckoutPresence(checkoutId);
+        checkout.returnBook();
+    }
+
+    public Checkout ValidateCheckoutPresence(Long checkoutId) {
+        return checkoutRepository.findById(checkoutId)
+                .orElseThrow(() -> new IdPresenceException("존재하지 않는 대출입니다."));
+    }
 }
