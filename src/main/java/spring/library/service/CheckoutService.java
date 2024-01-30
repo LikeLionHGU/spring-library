@@ -6,7 +6,10 @@ import spring.library.domain.Book;
 import spring.library.domain.Checkout;
 import spring.library.domain.Member;
 import spring.library.dto.request.CheckoutRequest;
-import spring.library.dto.response.book.*;
+import spring.library.dto.response.checkout.CheckoutBookListResponse;
+import spring.library.dto.response.checkout.CheckoutBookResponse;
+import spring.library.dto.response.checkout.CheckoutHistoryListResponse;
+import spring.library.dto.response.checkout.CheckoutHistoryResponse;
 import spring.library.exception.BookNotFoundException;
 import spring.library.exception.MemberNotFoundException;
 import spring.library.repository.BookRepository;
@@ -28,27 +31,35 @@ public class CheckoutService {
                 .orElseThrow(() -> new MemberNotFoundException());
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new BookNotFoundException());
-        LocalDate dueDate;
-        String feature = String.valueOf(member.getFeature());
-
-        if (feature.equals("학생")) {
-            dueDate = LocalDate.now().plusDays(10);
-        } else if (feature.equals("교직원")) {
-            dueDate = LocalDate.now().plusDays(30);
-        } else {
-            dueDate = LocalDate.now().plusDays(110813);
-        }
-
-        Checkout checkout = Checkout.builder()
-                .book(book)
-                .member(member)
-                .loanDate(String.valueOf(LocalDate.now()))
-                .dueDate(String.valueOf(dueDate))
-                .isReturned(false)
-                .renewalCount(0)
-                .build();
+        Checkout checkout = Checkout.from(book, member);
         checkoutRepository.save(checkout);
     }
+//    public void checkoutBook(Long bookId, CheckoutRequest request) {
+//        Member member = memberRepository.findById(request.getMemberId())
+//                .orElseThrow(() -> new MemberNotFoundException());
+//        Book book = bookRepository.findById(bookId)
+//                .orElseThrow(() -> new BookNotFoundException());
+//        LocalDate dueDate;
+//        String feature = String.valueOf(member.getFeature());
+//
+//        if (feature.equals("학생")) {
+//            dueDate = LocalDate.now().plusDays(10);
+//        } else if (feature.equals("교직원")) {
+//            dueDate = LocalDate.now().plusDays(30);
+//        } else {
+//            dueDate = LocalDate.now().plusDays(110813);
+//        }
+//
+//        Checkout checkout = Checkout.builder()
+//                .book(book)
+//                .member(member)
+//                .loanDate(String.valueOf(LocalDate.now()))
+//                .dueDate(String.valueOf(dueDate))
+//                .isReturned(false)
+//                .renewalCount(0)
+//                .build();
+//        checkoutRepository.save(checkout);
+//    }
 
     public CheckoutBookListResponse getCheckoutList(Long memberId) {
         List<Checkout> checkouts = checkoutRepository.findByMember_MemberId(memberId);

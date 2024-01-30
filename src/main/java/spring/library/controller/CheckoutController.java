@@ -4,12 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.library.dto.request.CheckoutRequest;
-import spring.library.dto.response.book.CheckoutBookListResponse;
-import spring.library.dto.response.book.CheckoutHistoryListResponse;
-import spring.library.dto.response.member.MemberListResponse;
+import spring.library.dto.response.checkout.CheckoutBookListResponse;
+import spring.library.dto.response.checkout.CheckoutHistoryListResponse;
 import spring.library.service.CheckoutService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/checkouts")

@@ -40,6 +40,17 @@ public class Checkout {
     @JoinColumn(name = "bookId")
     private Book book;
 
+    public static Checkout from(Book book, Member member) {
+        return Checkout.builder()
+                .book(book)
+                .member(member)
+                .loanDate(String.valueOf(LocalDate.now()))
+                .dueDate(String.valueOf(LocalDate.now().plusDays(member.getFeature().getBorrowLimit())))
+                .isReturned(false)
+                .renewalCount(0)
+                .build();
+    }
+
     public void updateIsReturned(boolean isReturned) {
         this.isReturned = isReturned;
     }
