@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import spring.library.domain.enums.PurchaseRequestProcess;
 import spring.library.dto.PurchaseRequestDto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -38,11 +38,14 @@ public class PurchaseRequest extends BaseTime{
     private int publicationYear;
 
     @Column(name = "date_of_process")
-    private LocalDateTime dateOfProcess;
+    private LocalDate dateOfProcess;
 
     @Column(name = "process_result")
     @Enumerated(EnumType.STRING)
     private PurchaseRequestProcess processResult;
+
+    @Column(name = "request_date", nullable = false)
+    private LocalDate requestDate;
 
     public static PurchaseRequest from(Member member, PurchaseRequestDto purchaseRequestDto){
         return PurchaseRequest.builder()
@@ -51,6 +54,8 @@ public class PurchaseRequest extends BaseTime{
                 .author(purchaseRequestDto.getAuthor())
                 .publisher(purchaseRequestDto.getPublisher())
                 .publicationYear(purchaseRequestDto.getPublicationYear())
+                .requestDate(LocalDate.now())
+                .processResult(PurchaseRequestProcess.REQUEST)
                 .build();
     }
 }

@@ -28,7 +28,7 @@ public class Member extends BaseTime{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "feature", nullable = false)
-    private MemberFeature feature=MemberFeature.STUDENT;
+    private MemberFeature feature;
 
     @Column(name = "email", length = 30, nullable = false)
     private String email;
