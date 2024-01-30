@@ -35,4 +35,10 @@ public class CheckoutController {
         checkoutService.returnBook(checkoutId);
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping("/checkouts/{checkoutId}/extension")
+    public ResponseEntity<Void> extendCheckout(@PathVariable Long checkoutId){
+        checkoutService.extendCheckout(checkoutId);
+        return ResponseEntity.ok().build();
+    }
 }

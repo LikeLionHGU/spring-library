@@ -54,4 +54,22 @@ public class ExceptionController {
                 .build();
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
+
+    @ExceptionHandler(CheckoutRenewalCountLimitException.class)
+    public ResponseEntity<ExceptionResponse> handleCheckoutRenewalCountLimitException(CheckoutRenewalCountLimitException e) {
+        ExceptionResponse response = ExceptionResponse.builder()
+                .error(HttpStatus.CONFLICT.getReasonPhrase())
+                .message(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
+    @ExceptionHandler(NotRenewalPeriodException.class)
+    public ResponseEntity<ExceptionResponse> handleNotRenewalPeriodException(NotRenewalPeriodException e) {
+        ExceptionResponse response = ExceptionResponse.builder()
+                .error(HttpStatus.CONFLICT.getReasonPhrase())
+                .message(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
 }
