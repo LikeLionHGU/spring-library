@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface CheckoutRepository extends JpaRepository<Checkout, Long> {
     Optional<Checkout> findByBookAndIsReturned(Book book, boolean isReturned);
 
-    @Query("select c from Checkout c join fetch c.book WHERE c.member.memberId = :memberId")
-    List<Checkout> findByMemberIdFetchMember(Long memberId);
+    @Query("select c from Checkout c join fetch c.book where c.member.memberId = :memberId and c.isReturned = false")
+    List<Checkout> findNotReturnedByMemberIdFetchMember(Long memberId);
 }

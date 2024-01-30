@@ -51,7 +51,7 @@ public class CheckoutService {
 
     public List<CheckoutDto> getCheckouts(Long memberId) {
         ValidateMemberPresence(memberId);
-        return checkoutRepository.findByMemberIdFetchMember(memberId).stream()
+        return checkoutRepository.findNotReturnedByMemberIdFetchMember(memberId).stream()
                 .map(CheckoutDto::from)
                 .toList();
     }
