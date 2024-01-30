@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.library.controller.request.CheckoutRequest;
+import spring.library.controller.response.CheckoutHistoryListResponse;
 import spring.library.controller.response.CheckoutListResponse;
 import spring.library.sevice.CheckoutService;
 
@@ -23,4 +24,10 @@ public class CheckoutController {
     public ResponseEntity<CheckoutListResponse> getCheckouts(@RequestParam Long memberId){
         return ResponseEntity.ok(new CheckoutListResponse(checkoutService.getCheckouts(memberId)));
     }
+
+    @GetMapping("/checkouts/history")
+    public ResponseEntity<CheckoutHistoryListResponse> getCheckoutsHistory(@RequestParam Long memberId){
+        return ResponseEntity.ok(new CheckoutHistoryListResponse(checkoutService.getCheckoutsHistory(memberId)));
+    }
+
 }

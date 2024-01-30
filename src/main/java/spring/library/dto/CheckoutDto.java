@@ -19,6 +19,7 @@ public class CheckoutDto {
     private LocalDate checkOutDate;
     private LocalDate dueDate;
     private int renewalCount;
+    private boolean isReturned;
 
     public static CheckoutDto from(Checkout checkout) {
         return CheckoutDto.builder()
@@ -28,6 +29,7 @@ public class CheckoutDto {
                 .checkOutDate(checkout.getLoanDate())
                 .dueDate(checkout.getDueDate())
                 .renewalCount(checkout.getRenewalCount())
+                .isReturned(checkout.isReturned())
                 .build();
     }
 }

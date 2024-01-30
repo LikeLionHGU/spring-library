@@ -15,4 +15,7 @@ public interface CheckoutRepository extends JpaRepository<Checkout, Long> {
 
     @Query("select c from Checkout c join fetch c.book where c.member.memberId = :memberId and c.isReturned = false")
     List<Checkout> findNotReturnedByMemberIdFetchMember(Long memberId);
+
+    @Query("select c from Checkout c join fetch c.book where c.member.memberId = :memberId")
+    List<Checkout> findByMemberIdFetchMember(Long memberId);
 }

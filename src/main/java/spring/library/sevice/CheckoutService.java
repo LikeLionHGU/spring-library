@@ -55,4 +55,11 @@ public class CheckoutService {
                 .map(CheckoutDto::from)
                 .toList();
     }
+
+    public List<CheckoutDto> getCheckoutsHistory(Long memberId) {
+        ValidateMemberPresence(memberId);
+        return checkoutRepository.findByMemberIdFetchMember(memberId).stream()
+                .map(CheckoutDto::from)
+                .toList();
+    }
 }
