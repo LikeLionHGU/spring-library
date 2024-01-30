@@ -3,28 +3,44 @@ package spring.library.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring.library.controller.response.ApiResponse;
-import spring.library.controller.response.BookListResponse;
+import spring.library.controller.form.MemberForm;
+import spring.library.controller.response.*;
+import spring.library.domain.Book;
 import spring.library.dto.BookDto;
+import spring.library.dto.MemberDto;
 import spring.library.service.BookService;
+import spring.library.service.CheckoutService;
+import spring.library.service.MemberService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/checkout")
+@RequestMapping("/checkouts")
 @RequiredArgsConstructor
 @CrossOrigin
 public class CheckoutController {
 
+    private final MemberService memberService;
     private final BookService bookService;
+    private final CheckoutService checkoutService;
+
+    @PostMapping("/{bookId}")
+    public ResponseEntity<ApiResponse> borrowBook(@PathVariable Long bookId , @RequestBody MemberForm memberForm){
+        BookDto bookDto = bookService.getBook(bookId);
+        MemberDto memberDto = memberService.getMemberInfo(memberForm.getMemberId());
+        checkoutService.checkOut(memberDto,bookDto);
+        ApiResponse response = new CheckoutBorrowResponse();
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping()
-    public ResponseEntity<ApiResponse> getMemberBook(@PathVariable Long memberId){
-        List<BookDto> bookDto = bookService.bookBorrowed(memberId);
-        ApiResponse response =new BookListResponse(bookDto);
+    public ResponseEntity<ApiResponse> getTakenBook(@PathVariable Long memberId){
+        List<BookDto> bookDto = checkoutService.getBookTakenByMember(memberId);
+        ApiResponse response = new CheckoutListResponse(bookDto);
         return ResponseEntity.ok(response);
 
     }
+
 
 
 

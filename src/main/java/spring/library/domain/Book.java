@@ -8,10 +8,11 @@ import java.util.Date;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Book {
+public class Book extends BorrowTime {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
