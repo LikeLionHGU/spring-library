@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import spring.library.controller.request.BookRegisterRequest;
 import spring.library.controller.response.BookListResponse;
 import spring.library.dto.BookDto;
-import spring.library.sevice.BookService;
+import spring.library.service.BookService;
 
 @RestController
 @RequiredArgsConstructor

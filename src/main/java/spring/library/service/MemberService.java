@@ -1,4 +1,4 @@
-package spring.library.sevice;
+package spring.library.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class MemberService {
     }
 
     public void updateMember(Long memberId, MemberDto memberDto) {
-        Member member = ValidateIdPresence(memberId);
+        Member member = validateIdPresence(memberId);
         validateIdNumberDuplication(memberDto.getIdNumber(), memberId);
         member.updateAll(memberDto);
     }
@@ -53,11 +53,11 @@ public class MemberService {
     }
 
     public void deleteMember(Long memberId) {
-        ValidateIdPresence(memberId);
+        validateIdPresence(memberId);
         memberRepository.deleteById(memberId);
     }
 
-    private Member ValidateIdPresence(Long memberId){
+    private Member validateIdPresence(Long memberId){
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new IdPresenceException("존재하지 않는 회원입니다."));
     }

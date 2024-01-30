@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import spring.library.controller.request.CheckoutRequest;
 import spring.library.controller.response.CheckoutHistoryListResponse;
 import spring.library.controller.response.CheckoutListResponse;
-import spring.library.sevice.CheckoutService;
+import spring.library.service.CheckoutService;
 
 @RestController
 @RequiredArgsConstructor

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import spring.library.controller.request.MemberRegisterRequest;
 import spring.library.controller.response.MemberListResponse;
 import spring.library.dto.MemberDto;
-import spring.library.sevice.MemberService;
+import spring.library.service.MemberService;
 
 @RestController
 @RequiredArgsConstructor

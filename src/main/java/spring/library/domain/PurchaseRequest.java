@@ -1,10 +1,7 @@
 package spring.library.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import spring.library.domain.enums.PurchaseRequestProcess;
 import spring.library.dto.PurchaseRequestDto;
 
@@ -15,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class PurchaseRequest extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +55,10 @@ public class PurchaseRequest extends BaseTime{
                 .requestDate(LocalDate.now())
                 .processResult(PurchaseRequestProcess.REQUEST)
                 .build();
+    }
+
+    public void updateProcessResult(String processResult) {
+        this.processResult = PurchaseRequestProcess.from(processResult);
+        this.dateOfProcess = LocalDate.now();
     }
 }

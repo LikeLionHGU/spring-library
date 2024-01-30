@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.library.controller.request.PurchaseRequestPatchRequest;
 import spring.library.controller.request.PurchaseRequestRequest;
 import spring.library.domain.PurchaseRequest;
 
@@ -45,6 +46,12 @@ public class PurchaseRequestDto {
                 .requestDate(purchaseRequest.getRequestDate())
                 .dateOfProcess(purchaseRequest.getDateOfProcess())
                 .processResult(purchaseRequest.getProcessResult().getProcess())
+                .build();
+    }
+
+    public static PurchaseRequestDto from(PurchaseRequestPatchRequest purchaseRequestPatchRequest){
+        return PurchaseRequestDto.builder()
+                .processResult(purchaseRequestPatchRequest.getProcessResult())
                 .build();
     }
 }

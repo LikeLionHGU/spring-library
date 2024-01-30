@@ -1,4 +1,4 @@
-package spring.library.sevice;
+package spring.library.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,13 @@
 package spring.library.domain.enums;
 
 import lombok.Getter;
+import spring.library.exception.InvalidEnumValueException;
 
 @Getter
 public enum PurchaseRequestProcess {
     REQUEST("신청"),
     APPROVE("승인"),
-    REJECT("거절");
+    CANCEL("취소");
 
     private final String process;
 
@@ -19,6 +20,6 @@ public enum PurchaseRequestProcess {
                 return purchaseRequestProcess;
             }
         }
-        return REQUEST;
+        throw new InvalidEnumValueException("유효하지 않은 구매 요청 처리 결과입니다.");
     }
 }
