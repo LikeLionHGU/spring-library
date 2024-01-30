@@ -3,11 +3,9 @@ package spring.library.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.library.controller.request.CheckoutRequest;
+import spring.library.controller.response.CheckoutListResponse;
 import spring.library.sevice.CheckoutService;
 
 @RestController
@@ -19,5 +17,10 @@ public class CheckoutController {
     public ResponseEntity<Void> checkoutBook(@PathVariable Long bookId, @RequestBody CheckoutRequest checkoutRequest){
         checkoutService.checkoutBook(bookId, checkoutRequest.getMemberId());
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/checkouts")
+    public ResponseEntity<CheckoutListResponse> getCheckouts(@RequestParam Long memberId){
+        return ResponseEntity.ok(new CheckoutListResponse(checkoutService.getCheckouts(memberId)));
     }
 }

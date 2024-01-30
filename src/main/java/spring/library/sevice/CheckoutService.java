@@ -6,11 +6,14 @@ import org.springframework.transaction.annotation.Transactional;
 import spring.library.domain.Book;
 import spring.library.domain.Checkout;
 import spring.library.domain.Member;
+import spring.library.dto.CheckoutDto;
 import spring.library.exception.BookIsUnavailableException;
 import spring.library.exception.IdPresenceException;
 import spring.library.repository.BookRepository;
 import spring.library.repository.CheckoutRepository;
 import spring.library.repository.MemberRepository;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -44,5 +47,12 @@ public class CheckoutService {
     public Member ValidateMemberPresence(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new IdPresenceException("존재하지 않는 회원입니다."));
+    }
+
+    public List<CheckoutDto> getCheckouts(Long memberId) {
+        ValidateMemberPresence(memberId);
+        return checkoutRepository.findByMemberIdFetchMember(memberId).stream()
+                .map(CheckoutDto::from)
+                .toList();
     }
 }

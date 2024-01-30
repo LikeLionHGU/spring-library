@@ -5,6 +5,9 @@ import lombok.*;
 import spring.library.domain.enums.BookClassification;
 import spring.library.dto.BookDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,6 +36,9 @@ public class Book extends BaseTime{
     @Enumerated(EnumType.STRING)
     @Column(name = "classification", nullable = false)
     private BookClassification classification;
+
+    @OneToMany(mappedBy = "book")
+    private List<Checkout> checkouts = new ArrayList<>();
 
     public static Book from(BookDto bookDto){
         return Book.builder()
