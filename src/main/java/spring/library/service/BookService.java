@@ -12,6 +12,7 @@ import spring.library.repository.BookRepository;
 import spring.library.repository.MemberRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,9 +45,23 @@ public class BookService {
 
     }
 
+
+
     public long countAllBook(){
         return bookRepository.count();
     }
+
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ위는 책 정보
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ아래는 대출 관련
+    public List<BookDto> bookBorrowed(Long memberId){
+        List<Book> books = bookRepository.findBookByMemberId(memberId);
+        return books.stream().map(BookDto::from).toList();
+    }
+
+
+
+
 
 
 

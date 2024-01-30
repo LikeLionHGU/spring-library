@@ -18,8 +18,6 @@ public class Book {
   private Long bookId;
 
   private String title;
-
-  private String content;
   private String author;
   private String publisher;
   private int publicationYear;
@@ -34,7 +32,6 @@ public class Book {
   public static Book toBook(BookDto bookDto){
     return Book.builder()
         .title(bookDto.getTitle())
-        .content(bookDto.getContent())
         .author(bookDto.getAuthor())
         .publisher(bookDto.getPublisher())
         .publicationYear(bookDto.getPublicationYear())

@@ -17,7 +17,6 @@ public class BookDto {
 
   private String title;
 
-  private String content;
   private String author;
   private String publisher;
   private int publicationYear;

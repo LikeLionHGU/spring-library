@@ -7,7 +7,6 @@ public class BookResponse extends ApiResponse {
     private Long bookId;
     private String title;
 
-    private String content;
     private String author;
     private String publisher;
     private int publicationYear;
@@ -19,7 +18,7 @@ public class BookResponse extends ApiResponse {
     public BookResponse(BookDto bookDto) {
         this.bookId=bookDto.getBookId();
         this.title =bookDto.getTitle();
-        this.content = bookDto.getContent();
+
         this.author = bookDto.getAuthor();
         this.publisher = bookDto.getPublisher();
         this.publicationYear = bookDto.getPublicationYear();
