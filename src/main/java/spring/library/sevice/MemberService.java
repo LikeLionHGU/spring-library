@@ -57,7 +57,7 @@ public class MemberService {
         memberRepository.deleteById(memberId);
     }
 
-    public Member ValidateIdPresence(Long memberId){
+    private Member ValidateIdPresence(Long memberId){
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new IdPresenceException("존재하지 않는 회원입니다."));
     }

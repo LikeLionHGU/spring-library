@@ -34,7 +34,7 @@ public class CheckoutService {
         checkoutRepository.save(Checkout.from(member, book));
     }
 
-    public void validateBookIsAvailable(Book book) {
+    private void validateBookIsAvailable(Book book) {
         checkoutRepository.findByBookAndIsReturned(book, false)
                 .ifPresent(checkout -> {
                     throw new BookIsUnavailableException();
@@ -47,7 +47,7 @@ public class CheckoutService {
                 .orElseThrow(() -> new IdPresenceException("존재하지 않는 도서입니다."));
     }
 
-    public Member ValidateMemberPresence(Long memberId) {
+    private Member ValidateMemberPresence(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new IdPresenceException("존재하지 않는 회원입니다."));
     }
@@ -72,7 +72,7 @@ public class CheckoutService {
         checkout.returnBook();
     }
 
-    public Checkout ValidateCheckoutPresence(Long checkoutId) {
+    private Checkout ValidateCheckoutPresence(Long checkoutId) {
         return checkoutRepository.findById(checkoutId)
                 .orElseThrow(() -> new IdPresenceException("존재하지 않는 대출입니다."));
     }

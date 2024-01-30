@@ -68,8 +68,8 @@ public class Checkout extends BaseTime{
         this.renewalCount++;
     }
 
-    public void validateRenewalCount(int renewalCount) {
-        if (this.renewalCount >= renewalCount) {
+    public void validateRenewalCount(int maxRenewalCount) {
+        if (this.renewalCount >= maxRenewalCount) {
             throw new CheckoutRenewalCountLimitException();
         }
     }
