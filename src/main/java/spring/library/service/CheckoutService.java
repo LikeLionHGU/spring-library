@@ -54,8 +54,8 @@ public class CheckoutService {
     if (bookDto.getStatus().equals("대출가능") && member.getNumberBooks() < borrowMaxNum) {
       book.get().setMember(member);
 
-//      bookDto.setBorrowDate(LocalDate.now());
-//      bookDto.setExtendDue(LocalDate.now().plusDays(duration));
+      bookDto.setBorrowDate(LocalDate.now());
+      bookDto.setExtendDue(LocalDate.now().plusDays(duration));
 
       member.setNumberBooks(member.getNumberBooks() + 1);
       book.get().setStatus("대출중");
@@ -97,7 +97,7 @@ public class CheckoutService {
 
 
       member.setNumberBooks(member.getNumberBooks() - 1);
-      book.get().setStatus("대출중");
+      book.get().setStatus("대출가능");
       bookRepository.save(book.get());
       memberRepository.save(member);
     } else {

@@ -27,10 +27,10 @@ public class Book extends BorrowTime {
   private int amount;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="memberId")
+  @JoinColumn(name = "memberId")
   private Member member;
 
-  public static Book toBook(BookDto bookDto){
+  public static Book toBook(BookDto bookDto) {
     return Book.builder()
         .title(bookDto.getTitle())
         .author(bookDto.getAuthor())
@@ -40,5 +40,5 @@ public class Book extends BorrowTime {
         .status(bookDto.getStatus())
         .amount(bookDto.getAmount())
         .build();
-    }
   }
+}
