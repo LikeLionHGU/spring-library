@@ -17,8 +17,6 @@ public class BookRequest {
     private String publisher;
     private int publicationYear;
     private String classification;
-    private boolean status;
-    private int amount;
 
     public static BookRequest from(Book book) {
         return BookRequest.builder()
@@ -27,8 +25,6 @@ public class BookRequest {
                 .publisher(book.getPublisher())
                 .publicationYear(book.getPublicationYear())
                 .classification(book.getClassification())
-//                .status(book.isStatus())
-//                .amount(book.getAmount())
                 .build();
     }
 
