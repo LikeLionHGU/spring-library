@@ -1,11 +1,20 @@
 package spring.library.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import spring.library.domain.enums.PurchaseRequestProcess;
+import spring.library.dto.PurchaseRequestDto;
 
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
 public class PurchaseRequest extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +43,14 @@ public class PurchaseRequest extends BaseTime{
     @Column(name = "process_result")
     @Enumerated(EnumType.STRING)
     private PurchaseRequestProcess processResult;
+
+    public static PurchaseRequest from(Member member, PurchaseRequestDto purchaseRequestDto){
+        return PurchaseRequest.builder()
+                .member(member)
+                .title(purchaseRequestDto.getTitle())
+                .author(purchaseRequestDto.getAuthor())
+                .publisher(purchaseRequestDto.getPublisher())
+                .publicationYear(purchaseRequestDto.getPublicationYear())
+                .build();
+    }
 }
