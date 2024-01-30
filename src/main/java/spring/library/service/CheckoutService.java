@@ -64,8 +64,8 @@ public class CheckoutService {
 
   // To-Do
   // 2. 빌린 책 확인
-  //  1) 회원 id받기
-  //  2) 그 회원 id로 책 mapping
+  //    1) 회원 id받기
+  //    2) 그 회원 id로 책 mapping
   public List<BookDto> getBookTakenByMember(Long memberId){
     List<Book> books = bookRepository.findBookByMemberId(memberId);
 
@@ -73,10 +73,15 @@ public class CheckoutService {
   }
 
 
+
+
   // To-Do
   // 3. 반납
   //  1) 대출 중인지 확인
   //  2) 반납 후 빌린 책 --
+
+
+
 
   // To-Do
   // 4. 연장

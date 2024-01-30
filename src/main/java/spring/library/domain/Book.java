@@ -3,7 +3,7 @@ package spring.library.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import spring.library.dto.BookDto;
-
+import jakarta.persistence.Entity;
 import java.util.Date;
 
 @Entity
@@ -27,7 +27,7 @@ public class Book extends BorrowTime {
   private int amount;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="memeberId")
+  @JoinColumn(name="memberId")
   private Member member;
 
   public static Book toBook(BookDto bookDto){

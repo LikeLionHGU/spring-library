@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import spring.library.controller.form.MemberForm;
 import spring.library.controller.response.*;
 import spring.library.domain.Book;
+import spring.library.domain.Member;
 import spring.library.dto.BookDto;
 import spring.library.dto.MemberDto;
 import spring.library.service.BookService;
@@ -20,29 +21,26 @@ import java.util.List;
 @CrossOrigin
 public class CheckoutController {
 
-    private final MemberService memberService;
-    private final BookService bookService;
-    private final CheckoutService checkoutService;
+  private final MemberService memberService;
+  private final BookService bookService;
+  private final CheckoutService checkoutService;
 
-    @PostMapping("/{bookId}")
-    public ResponseEntity<ApiResponse> borrowBook(@PathVariable Long bookId , @RequestBody MemberForm memberForm){
-        BookDto bookDto = bookService.getBook(bookId);
-        MemberDto memberDto = memberService.getMemberInfo(memberForm.getMemberId());
-        checkoutService.checkOut(memberDto,bookDto);
-        ApiResponse response = new CheckoutBorrowResponse();
-        return ResponseEntity.ok(response);
-    }
+  @PostMapping("/{bookId}")
+  public ResponseEntity<ApiResponse> borrowBook(
+      @PathVariable Long bookId, @RequestBody MemberForm memberForm) {
+    BookDto bookDto = bookService.getBook(bookId);
+    MemberDto memberDto = memberService.getMemberInfo(memberForm.getMemberId());
+    checkoutService.checkOut(memberDto, bookDto);
+    ApiResponse response = new CheckoutBorrowResponse();
+    return ResponseEntity.ok(response);
+  }
 
-    @GetMapping()
-    public ResponseEntity<ApiResponse> getTakenBook(@PathVariable Long memberId){
-        List<BookDto> bookDto = checkoutService.getBookTakenByMember(memberId);
-        ApiResponse response = new CheckoutListResponse(bookDto);
-        return ResponseEntity.ok(response);
-
-    }
-
-
-
-
+  @GetMapping
+  public ResponseEntity<ApiResponse> getTakenBook(@RequestParam("memberId") Long memberId) {
+    List<BookDto> bookDto = checkoutService.getBookTakenByMember(memberId);
+    ApiResponse response = new CheckoutListResponse(bookDto);
+    return ResponseEntity.ok(response);
+  }
+  
 
 }

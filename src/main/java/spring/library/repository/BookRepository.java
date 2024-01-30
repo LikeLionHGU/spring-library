@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
 
-    @Query("select b from Book b join fetch b.member where b.member = :memberId")
+    @Query("select b from Book b join fetch b.member where b.member.memberId = :memberId")
     List<Book> findBookByMemberId(Long memberId);
 
     @Query("select b from Book b where b.status ='대출가능' and b.bookId = :bookId")

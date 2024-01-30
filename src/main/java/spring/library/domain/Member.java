@@ -1,14 +1,14 @@
 package spring.library.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.Fetch;
 import lombok.*;
 import spring.library.dto.MemberDto;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Entity
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +23,7 @@ public class Member extends BorrowTime {
     private String email;
     private String phoneNumber;
     private int numberBooks;
+
 
     public static Member toMember(MemberDto memberDto) {
         return Member.builder()
