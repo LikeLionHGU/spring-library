@@ -1,10 +1,14 @@
 package spring.library.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Builder
@@ -35,5 +39,17 @@ public class Checkout {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId")
     private Book book;
+
+    public void updateIsReturned(boolean isReturned) {
+        this.isReturned = isReturned;
+    }
+
+    public void updateRenewalCount(int renewalCount) {
+        this.renewalCount = renewalCount;
+
+        LocalDate due = LocalDate.parse(this.dueDate, DateTimeFormatter.ISO_LOCAL_DATE);
+        due = due.plusDays(5);
+        this.dueDate = due.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
 
 }
