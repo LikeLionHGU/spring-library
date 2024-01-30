@@ -27,8 +27,8 @@ public class BookRequest {
                 .publisher(book.getPublisher())
                 .publicationYear(book.getPublicationYear())
                 .classification(book.getClassification())
-                .status(book.isStatus())
-                .amount(book.getAmount())
+//                .status(book.isStatus())
+//                .amount(book.getAmount())
                 .build();
     }
 
@@ -41,8 +41,8 @@ public class BookRequest {
                 .publisher(bookForm.getPublisher())
                 .publicationYear(bookForm.getPublicationYear())
                 .classification(bookForm.getClassification())
-                .status(status)
-                .amount(bookForm.getAmount())
+//                .status(status)
+//                .amount(bookForm.getAmount())
                 .build();
     }
 
