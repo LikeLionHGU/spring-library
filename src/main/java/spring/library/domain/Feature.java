@@ -6,8 +6,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Feature {
-//    학생, 교직원, 관리자
-
     STUDENT("학생", 10),
     STAFF("교직원", 30),
     ADMIN("관리자", 110813);
