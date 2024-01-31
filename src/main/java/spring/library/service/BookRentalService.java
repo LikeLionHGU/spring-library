@@ -11,6 +11,7 @@ import spring.library.repository.BookHistoryRepository;
 import spring.library.repository.BookRepository;
 import spring.library.repository.MemberRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -72,6 +73,22 @@ public class BookRentalService {
 		return savedRentalManagement;
 	}
 
+	public List<RentalManagement> showRentalBookList(Long memberId){
+		if (!memberRepository.existsById(memberId)) { throw new IllegalArgumentException("해당 멤버의 기록이 없습니다."); }
+		List<RentalManagement> firstCheckBooks = bookHistoryRepository.findByRentMemberId(memberId);
+    for (RentalManagement book : firstCheckBooks) System.out.println(book);
+		System.out.println("----------------");
+    System.out.println("----------------");
+		List<RentalManagement> rentedBooks = new ArrayList<>(); ;
+		for(RentalManagement book : firstCheckBooks){
+			boolean isRental = book.getStatus().equals("대출 중");
+			if(isRental) rentedBooks.add(book);
+		}
+		System.out.println("----------------");
+
+		return rentedBooks;
+
+	}
 
 	public List<RentalManagement> showRentalBookHistory(Long memberId) {
 		if (!memberRepository.existsById(memberId)) { throw new IllegalArgumentException("해당 멤버의 기록이 없습니다."); }

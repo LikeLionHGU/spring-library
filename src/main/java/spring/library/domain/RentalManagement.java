@@ -54,7 +54,7 @@ public class RentalManagement {
 		this.dueDate = dueDate;
 		this.renewalCount = 0;
 		this.isReturned = true;
-		this.status = "대출완료";
+		this.status = "대출 중";
 		this.rentMemberId = rentMeberId;
 	}
 

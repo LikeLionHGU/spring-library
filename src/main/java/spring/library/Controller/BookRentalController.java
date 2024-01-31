@@ -7,6 +7,7 @@ import spring.library.domain.RentalManagement;
 import spring.library.dto.MemberDto;
 import spring.library.service.BookRentalService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,6 +21,12 @@ public class BookRentalController {
 		@PathVariable Long bookId, @RequestBody MemberDto memberDto) throws IllegalArgumentException {
 		RentalManagement rentalManagement = bookRentalService.rentBook(bookId, memberDto.getMemberId());
 		return ResponseEntity.ok().body(rentalManagement);
+	}
+
+	@GetMapping("/checkouts")
+	public ResponseEntity<List<RentalManagement>> showRentalBookList(@RequestParam Long memberId){
+		List<RentalManagement>RentalBookList = bookRentalService.showRentalBookList(memberId);
+		return ResponseEntity.ok().body(RentalBookList);
 	}
 
 	@GetMapping("/checkouts/history")
