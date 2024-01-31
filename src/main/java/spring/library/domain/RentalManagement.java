@@ -43,8 +43,10 @@ public class RentalManagement {
 
 	private String status;
 
+	private Long rentMemberId;
 
-	public RentalManagement(Book book, String checkOutDate, String dueDate){
+
+	public RentalManagement(Book book, String checkOutDate, String dueDate, Long rentMeberId){
 	this.checkOutId = book.getBookId();
 		this.title = book.getTitle();
 		this.author = book.getAuthor();
@@ -53,11 +55,11 @@ public class RentalManagement {
 		this.renewalCount = 0;
 		this.isReturned = true;
 		this.status = "대출완료";
+		this.rentMemberId = rentMeberId;
 	}
 
 
-
-	public static RentalManagement BookToRentalManagement(Book book, int borrowRangeday){
+	public static RentalManagement BookToRentalManagement(Book book, int borrowRangeday, Long rentMemberId){
 
 		LocalDateTime currentTime = LocalDateTime.now();
 		LocalDateTime dueDateTime = LocalDateTime.now().plusDays(borrowRangeday);
@@ -66,7 +68,7 @@ public class RentalManagement {
 		String borrowDateFormattedTime = currentTime.format(formatter);
 		String dueDateFormattedTime = dueDateTime.format(formatter);
 
-		RentalManagement rentalManagement = new RentalManagement(book, borrowDateFormattedTime, dueDateFormattedTime);
+		RentalManagement rentalManagement = new RentalManagement(book, borrowDateFormattedTime, dueDateFormattedTime, rentMemberId);
 		return rentalManagement;
 	}
 

@@ -35,8 +35,8 @@ public class Member {
 	private String phoneNumber;
 
 
-	@OneToMany(mappedBy = "member")
-	public static List<RentalManagement> rentalHistory = new ArrayList<>();
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+	private List<RentalManagement> rentalHistory = new ArrayList<>();
 
 
 	public static Member toMember(MemberDto memberDto){

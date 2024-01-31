@@ -3,12 +3,8 @@ package spring.library.Controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring.library.domain.Book;
 import spring.library.domain.RentalManagement;
-import spring.library.dto.BookDto;
 import spring.library.dto.MemberDto;
-import spring.library.repository.BookRepository;
-import spring.library.repository.MemberRepository;
 import spring.library.service.BookRentalService;
 
 import java.util.List;
@@ -27,8 +23,10 @@ public class BookRentalController {
 	}
 
 	@GetMapping("/checkouts/history")
-	public ResponseEntity<List<Book>> showRentalBookHistory(@RequestParam Long memberId) {
-		List<Book> RentalBookHistory = bookRentalService.showRentalBookHistory(memberId);
+//	public ResponseEntity<List<Book>> showRentalBookHistory(@RequestParam Long memberId) {
+	public ResponseEntity<List<RentalManagement>> showRentalBookHistory(@RequestParam Long memberId) {
+		List<RentalManagement> RentalBookHistory = bookRentalService.showRentalBookHistory(memberId);
+//		List<Book> RentalBookHistory = bookRentalService.showRentalBookHistory(memberId);
 		return ResponseEntity.ok().body(RentalBookHistory);
 	}
 
