@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.library.dto.request.BookRequest;
+import spring.library.controller.request.BookRequest;
+import spring.library.dto.BookDto;
+import spring.library.dto.CheckoutDto;
 
 @Entity
 @Builder
@@ -26,22 +28,27 @@ public class Book extends BaseEntity{
     private int publicationYear;
     @Column(nullable = false)
     private String classification;
+    @Column(nullable = false)
+    private String status;
 
-    public static Book toBook(BookRequest bookRequest) {
+    public static Book from(BookDto bookDto){
         return Book.builder()
-                .title(bookRequest.getTitle())
-                .author(bookRequest.getAuthor())
-                .publisher(bookRequest.getPublisher())
-                .publicationYear(bookRequest.getPublicationYear())
-                .classification(bookRequest.getClassification())
+                .title(bookDto.getTitle())
+                .author(bookDto.getAuthor())
+                .publisher(bookDto.getPublisher())
+                .publicationYear(bookDto.getPublicationYear())
+                .classification(bookDto.getClassification())
+                .status("대출가능")
                 .build();
     }
-
-    public void update(BookRequest bookRequest) {
-        this.title = bookRequest.getTitle();
-        this.author = bookRequest.getAuthor();
-        this.publisher = bookRequest.getPublisher();
-        this.publicationYear = bookRequest.getPublicationYear();
-        this.classification = bookRequest.getClassification();
+    public void update(BookDto bookDto) {
+        this.title = bookDto.getTitle();
+        this.author = bookDto.getAuthor();
+        this.publisher = bookDto.getPublisher();
+        this.publicationYear = bookDto.getPublicationYear();
+        this.classification = bookDto.getClassification();
+    }
+    public void updateStatus(String status) {
+        this.status = status;
     }
 }

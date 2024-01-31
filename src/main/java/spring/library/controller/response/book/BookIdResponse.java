@@ -1,10 +1,10 @@
-package spring.library.dto.response.book;
+package spring.library.controller.response.book;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.library.dto.response.ApiResponse;
+import spring.library.controller.response.ApiResponse;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
