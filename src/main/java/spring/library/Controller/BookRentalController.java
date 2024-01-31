@@ -23,10 +23,8 @@ public class BookRentalController {
 	}
 
 	@GetMapping("/checkouts/history")
-//	public ResponseEntity<List<Book>> showRentalBookHistory(@RequestParam Long memberId) {
 	public ResponseEntity<List<RentalManagement>> showRentalBookHistory(@RequestParam Long memberId) {
 		List<RentalManagement> RentalBookHistory = bookRentalService.showRentalBookHistory(memberId);
-//		List<Book> RentalBookHistory = bookRentalService.showRentalBookHistory(memberId);
 		return ResponseEntity.ok().body(RentalBookHistory);
 	}
 

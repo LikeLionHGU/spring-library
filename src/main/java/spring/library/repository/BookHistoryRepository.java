@@ -4,4 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import spring.library.domain.Book;
 import spring.library.domain.RentalManagement;
 
-public interface BookHistoryRepository extends JpaRepository<RentalManagement, Long> {}
+import java.util.List;
+
+public interface BookHistoryRepository extends JpaRepository<RentalManagement, Long> {
+	List<RentalManagement> findByRentMemberId(Long rentMemberId);
+}
