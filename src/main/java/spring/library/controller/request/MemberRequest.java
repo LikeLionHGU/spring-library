@@ -1,15 +1,14 @@
-package spring.library.controller.form;
+package spring.library.controller.request;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import spring.library.domain.Feature;
 
 @Getter
 @NoArgsConstructor
-public class MemberForm {
+public class MemberRequest {
     private String name;
     private String email;
     private String idNumber;
-    private Feature feature;
+    private String feature;
     private String phoneNumber;
 }
