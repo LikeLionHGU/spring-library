@@ -25,8 +25,6 @@ public class BookDto {
   private String status;
   private int amount;
 
-  private LocalDate borrowDate;
-  private LocalDate extendDue;
 
   public static BookDto from(BookForm bookForm) {
     return BookDto.builder()
@@ -51,7 +49,6 @@ public class BookDto {
                 .classification(book.getClassification())
                 .status(book.getStatus())
                 .amount(book.getAmount())
-                .borrowDate(book.getBorrowDate())
               .build();
     }
 

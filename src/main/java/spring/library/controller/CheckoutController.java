@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import spring.library.controller.form.MemberForm;
 import spring.library.controller.response.*;
 import spring.library.domain.Book;
+import spring.library.domain.History;
 import spring.library.domain.Member;
 import spring.library.dto.BookDto;
 import spring.library.dto.MemberDto;
@@ -50,6 +51,14 @@ public class CheckoutController {
     checkoutService.returnBook(memberDto,bookDto);
     ApiResponse response = new ReturnResponse();
     return  ResponseEntity.ok(response);
+  }
+
+
+  @GetMapping("/history")
+  public ResponseEntity<ApiResponse> historyBook(@RequestParam("memberId") Long memberId){
+    List<BookDto> bookDto = checkoutService.getBookHistory(memberId);
+    ApiResponse response = new  HistoryListResponse(bookDto);
+    return ResponseEntity.ok(response);
   }
 
 

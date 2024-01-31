@@ -2,8 +2,13 @@ package spring.library.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import spring.library.dto.BookDto;
 import jakarta.persistence.Entity;
+
+import javax.sound.sampled.AudioFileFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,7 +17,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Book extends BorrowTime {
+public class Book {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +31,17 @@ public class Book extends BorrowTime {
   private String status;
   private int amount;
 
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "memberId")
   private Member member;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "borrowDate")
+  private History history;
+
+
+
 
   public static Book toBook(BookDto bookDto) {
     return Book.builder()
