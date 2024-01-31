@@ -9,6 +9,7 @@ import spring.library.dto.BookDto;
 import spring.library.dto.HistoryDto;
 import spring.library.dto.MemberDto;
 import spring.library.exception.BorrowUnable;
+import spring.library.exception.RenawalUnable;
 import spring.library.exception.ReturnUnable;
 import spring.library.repository.BookRepository;
 import spring.library.repository.HistoryRepository;
@@ -139,5 +140,19 @@ public class CheckoutService {
   // 4. 연장
   //  1) 반납 예정일인지 && 한 번이라도 했는지
   //  2)
+  public void renewalBook(Long checkOutId, MemberDto memberDto){
+
+    Optional<History> history = historyRepository.findByMemberAndBook(memberDto.getMemberId(),checkOutId);
+    LocalDate today = LocalDate.now();
+
+    if(history.get().getDue().isEqual(today)){
+      history.get().setDue(LocalDate.now().plusDays(5));
+    }else{
+      throw new RenawalUnable();
+    }
+
+  }
+
+
 
 }

@@ -9,6 +9,7 @@ import spring.library.domain.Book;
 import spring.library.domain.History;
 import spring.library.domain.Member;
 import spring.library.dto.BookDto;
+import spring.library.dto.HistoryDto;
 import spring.library.dto.MemberDto;
 import spring.library.service.BookService;
 import spring.library.service.CheckoutService;
@@ -44,6 +45,13 @@ public class CheckoutController {
   }
 
 
+  @GetMapping("/history")
+  public ResponseEntity<ApiResponse> historyBook(@RequestParam("memberId") Long memberId){
+    List<BookDto> bookDto = checkoutService.getBookHistory(memberId);
+    ApiResponse response = new  HistoryListResponse(bookDto);
+    return ResponseEntity.ok(response);
+  }
+
   @PatchMapping("/{checkOutId}/return")
   public ResponseEntity<ApiResponse> returnBook(@PathVariable Long checkOutId, @RequestBody MemberForm memberForm){
     BookDto bookDto = bookService.getBook(checkOutId);
@@ -54,11 +62,13 @@ public class CheckoutController {
   }
 
 
-  @GetMapping("/history")
-  public ResponseEntity<ApiResponse> historyBook(@RequestParam("memberId") Long memberId){
-    List<BookDto> bookDto = checkoutService.getBookHistory(memberId);
-    ApiResponse response = new  HistoryListResponse(bookDto);
-    return ResponseEntity.ok(response);
+  @PatchMapping("/{checkOutId}/renewal")
+  public ResponseEntity<ApiResponse> renewalBook(@PathVariable Long checkOutId, @RequestBody MemberForm memberForm){
+    MemberDto memberDto =memberService.getMemberInfo(memberForm.getMemberId());
+
+    checkoutService.renewalBook(checkOutId,memberDto);
+    ApiResponse response = new RenewalResponse();
+    return  ResponseEntity.ok(response);
   }
 
 }
