@@ -3,9 +3,10 @@ package spring.library.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring.library.dto.request.CheckoutRequest;
-import spring.library.dto.response.checkout.CheckoutBookListResponse;
-import spring.library.dto.response.checkout.CheckoutHistoryListResponse;
+import spring.library.controller.request.CheckoutRequest;
+import spring.library.controller.response.checkout.CheckoutBookListResponse;
+import spring.library.controller.response.checkout.CheckoutHistoryListResponse;
+import spring.library.dto.CheckoutDto;
 import spring.library.service.CheckoutService;
 
 @RestController
@@ -16,8 +17,9 @@ public class CheckoutController {
     private final CheckoutService checkoutService;
 
     @PostMapping("/{bookId}")
-    public void checkoutBook(@PathVariable Long bookId, @RequestBody CheckoutRequest request){
-        checkoutService.checkoutBook(bookId, request);
+    public void checkoutBook(@PathVariable Long bookId, @RequestBody CheckoutRequest checkoutRequest){
+        checkoutService.checkoutBook(bookId, CheckoutDto.from(checkoutRequest));
+//        checkoutService.checkoutBook(bookId, request);
     }
 
     @GetMapping
@@ -33,13 +35,13 @@ public class CheckoutController {
     }
 
     @PatchMapping("/{checkOutId}/return")
-    public void returnBook(@PathVariable Long checkOutId, @RequestBody CheckoutRequest request) {
-        checkoutService.returnBook(checkOutId, request);
+    public void returnBook(@PathVariable Long checkOutId, @RequestBody CheckoutRequest checkoutRequest) {
+        checkoutService.returnBook(checkOutId, CheckoutDto.from(checkoutRequest));
     }
 
     @PatchMapping("/{checkOutId}/renewal")
-    public void renewalBook(@PathVariable Long checkOutId, @RequestBody CheckoutRequest request) {
-        checkoutService.renewalBook(checkOutId, request);
+    public void renewalBook(@PathVariable Long checkOutId, @RequestBody CheckoutRequest checkoutRequest) {
+        checkoutService.renewalBook(checkOutId, CheckoutDto.from(checkoutRequest));
     }
 
 }

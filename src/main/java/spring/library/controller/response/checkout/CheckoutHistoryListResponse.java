@@ -1,4 +1,4 @@
-package spring.library.dto.response.checkout;
+package spring.library.controller.response.checkout;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

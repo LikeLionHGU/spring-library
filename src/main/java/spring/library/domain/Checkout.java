@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.library.dto.CheckoutDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,7 @@ public class Checkout {
     private Long checkoutId;
 
     @Column(nullable = false)
-    private String loanDate;
+    private String checkOutDate;
 
     @Column(nullable = false)
     private String dueDate;
@@ -44,7 +45,7 @@ public class Checkout {
         return Checkout.builder()
                 .book(book)
                 .member(member)
-                .loanDate(String.valueOf(LocalDate.now()))
+                .checkOutDate(String.valueOf(LocalDate.now()))
                 .dueDate(String.valueOf(LocalDate.now().plusDays(member.getFeature().getBorrowLimit())))
                 .isReturned(false)
                 .renewalCount(0)
