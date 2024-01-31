@@ -25,10 +25,10 @@ public class RentalManagement {
 	@Column(nullable = false)
 	private String author;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String checkOutDate;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String dueDate;
 
 	@Column(nullable = false)
@@ -43,23 +43,24 @@ public class RentalManagement {
 
 	private String status;
 
+	@Column(nullable = true)
 	private Long rentMemberId;
 
 
-	public RentalManagement(Book book, String checkOutDate, String dueDate, Long rentMeberId){
+	public RentalManagement(Book book, String checkOutDate, String dueDate, int renewalCount , boolean isReturned, String status , Long rentMeberId){
 	this.checkOutId = book.getBookId();
 		this.title = book.getTitle();
 		this.author = book.getAuthor();
 		this.checkOutDate = checkOutDate;
 		this.dueDate = dueDate;
-		this.renewalCount = 0;
-		this.isReturned = true;
-		this.status = "대출 중";
+		this.renewalCount = renewalCount;
+		this.isReturned = isReturned;
+		this.status = status;
 		this.rentMemberId = rentMeberId;
 	}
 
 
-	public static RentalManagement BookToRentalManagement(Book book, int borrowRangeday, Long rentMemberId){
+	public static RentalManagement RentBookToRentalManagement(Book book, int borrowRangeday, Long rentMemberId){
 
 		LocalDateTime currentTime = LocalDateTime.now();
 		LocalDateTime dueDateTime = LocalDateTime.now().plusDays(borrowRangeday);
@@ -68,7 +69,12 @@ public class RentalManagement {
 		String borrowDateFormattedTime = currentTime.format(formatter);
 		String dueDateFormattedTime = dueDateTime.format(formatter);
 
-		RentalManagement rentalManagement = new RentalManagement(book, borrowDateFormattedTime, dueDateFormattedTime, rentMemberId);
+		RentalManagement rentalManagement = new RentalManagement(book, borrowDateFormattedTime, dueDateFormattedTime, 0, false, "대출 중" ,rentMemberId);
+		return rentalManagement;
+	}
+
+	public static RentalManagement ReturnBookToRentalManagerment(Book book){
+		RentalManagement rentalManagement = new RentalManagement(book, null, null, 0, true, "대출 가능", null);
 		return rentalManagement;
 	}
 

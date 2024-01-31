@@ -1,7 +1,6 @@
 package spring.library.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import spring.library.domain.Book;
@@ -24,34 +23,26 @@ public class BookRentalService {
 	private final BookHistoryRepository bookHistoryRepository;
 
 	public int maxBorrowCount;
-	public int borrowRangeday;
+	public int borrowRangeDay;
 
 	public RentalManagement rentBook(Long bookId, Long memberId) throws IllegalArgumentException {
-		Book rentedBook =
-			bookRepository
-				.findById(bookId)
-				.orElseThrow(
-					() -> new IllegalArgumentException("대출할 도서를 찾지 못했습니다! rentalService 확인해주세요."));
-		Member renter =
-			(memberRepository
-				.findById(memberId)
-				.orElseThrow(
-					() -> new IllegalArgumentException("대출한 대상에 대해서 찾지 못했습니다! rentalService 확인해주세요")));
+		Book rentedBook = bookRepository.findById(bookId).orElseThrow(() -> new IllegalArgumentException("대출할 도서를 찾지 못했습니다! rentalService 확인해주세요."));
+		Member renter = memberRepository.findById(memberId).orElseThrow( () -> new IllegalArgumentException("대출한 대상에 대해서 찾지 못했습니다! rentalService 확인해주세요"));
 		String renterFeature = renter.getFeature(); // 교직원, 학생, master구분
 
 		// todo : enum 처리 가능하면, enum으로
 		switch (renterFeature) {
 			case "학생" -> {
 				maxBorrowCount = 10;
-				borrowRangeday = 10;
+				borrowRangeDay = 10;
 			}
 			case "교직원" -> {
 				maxBorrowCount = 20;
-				borrowRangeday = 30;
+				borrowRangeDay = 30;
 			}
 			case "관리자" -> {
 				maxBorrowCount = 100;
-				borrowRangeday = 110813;
+				borrowRangeDay = 110813;
 			}
 			default -> throw new IllegalArgumentException("허락되지 않은 feature입니다. 회원 등록부터 다시 해주세요.");
 		}
@@ -62,11 +53,10 @@ public class BookRentalService {
 		if (maxBorrowCount <= renter.getRentalHistory().size())
 			throw new IllegalArgumentException("대여할 수 있는 범위를 초과했습니다."); // 작동안함. repo에서 읽어와서 해야할 듯 함.
 
-		RentalManagement rentalManagement =
-			RentalManagement.BookToRentalManagement(rentedBook, borrowRangeday, memberId);
+		RentalManagement rentalManagement = RentalManagement.RentBookToRentalManagement(rentedBook, borrowRangeDay, memberId);
 
-		renter.getRentalHistory().add(rentalManagement);
-		memberRepository.save(renter);
+		renter.getRentalHistory().add(rentalManagement);    // 작동 안함. -> 휘발됨.
+		memberRepository.save(renter); // OneToMany의 cascade = CascadeType.ALL 때문에 넣은 것!
 
 		RentalManagement savedRentalManagement = bookHistoryRepository.save(rentalManagement);
 
@@ -81,15 +71,21 @@ public class BookRentalService {
 			boolean isRental = book.getStatus().equals("대출 중");
 			if(isRental) rentedBooks.add(book);
 		}
-
 		return rentedBooks;
-
 	}
 
 	public List<RentalManagement> showRentalBookHistory(Long memberId) {
 		if (!memberRepository.existsById(memberId)) { throw new IllegalArgumentException("해당 멤버의 기록이 없습니다."); }
 		List<RentalManagement> rentedBooks = bookHistoryRepository.findByRentMemberId(memberId);
 		return rentedBooks;
+	}
+
+	public RentalManagement returnBookToLibrary(Long bookId){
+		Book rentedBook = bookRepository.findById(bookId).orElseThrow( () -> new IllegalArgumentException("대출한 도서를 찾지 못했습니다! returnBookToLibrary 확인해주세요."));
+		RentalManagement rentalManagement = RentalManagement.ReturnBookToRentalManagerment(rentedBook);
+		RentalManagement savedRentalManagement = bookHistoryRepository.save(rentalManagement);
+		return savedRentalManagement;
 
 	}
+
 }

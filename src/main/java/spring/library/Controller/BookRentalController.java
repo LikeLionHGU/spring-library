@@ -35,4 +35,12 @@ public class BookRentalController {
 		return ResponseEntity.ok().body(RentalBookHistory);
 	}
 
+
+	@PatchMapping("/checkouts/{checkOutId}/return")
+	public ResponseEntity<RentalManagement> returnBook(@PathVariable Long checkOutId){
+		RentalManagement rentalManagement = bookRentalService.returnBookToLibrary(checkOutId);
+		return ResponseEntity.ok().body(rentalManagement);
+	}
+
+//	/checkouts/{checkOutId}/return
 }
