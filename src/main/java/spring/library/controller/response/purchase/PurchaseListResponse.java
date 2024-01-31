@@ -1,9 +1,7 @@
-package spring.library.dto.response.purchase;
+package spring.library.controller.response.purchase;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.library.domain.Purchase;
 
 import java.util.List;
 

@@ -1,11 +1,9 @@
-package spring.library.dto.response.purchase;
+package spring.library.controller.response.purchase;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import spring.library.domain.ProcessResult;
 import spring.library.domain.Purchase;
-import spring.library.dto.request.PurchaseRequest;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
@@ -15,7 +13,7 @@ public class PurchaseResponse {
     private String author;
     private String requestDate;
     private String dateOfProcess;
-    private ProcessResult processResult;
+    private String processResult;
 
     public PurchaseResponse(Long purchaseId, String title, String author, String requestDate, String dateOfProcess, ProcessResult processResult) {
         this.purchaseId = purchaseId;
@@ -23,7 +21,7 @@ public class PurchaseResponse {
         this.author = author;
         this.requestDate = requestDate;
         this.dateOfProcess = dateOfProcess;
-        this.processResult = processResult;
+        this.processResult = processResult.getProcessResult();
     }
 
     public PurchaseResponse(Purchase purchase) {
@@ -32,6 +30,6 @@ public class PurchaseResponse {
         this.author = purchase.getAuthor();
         this.requestDate = purchase.getRequestDate();
         this.dateOfProcess = purchase.getDateOfProcess();
-        this.processResult = purchase.getProcessResult();
+        this.processResult = purchase.getProcessResult().getProcessResult();
     }
 }

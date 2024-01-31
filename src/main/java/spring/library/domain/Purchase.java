@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.library.dto.request.PurchaseRequest;
+import spring.library.controller.request.PurchaseRequest;
+import spring.library.dto.PurchaseDto;
 
 import java.time.LocalDate;
 
@@ -37,22 +38,21 @@ public class Purchase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private Member member;
-
-    public static Purchase toPurchase(Member member, PurchaseRequest purchaseRequest) {
+    public static Purchase from(PurchaseDto purchaseDto, Member member) {
         return Purchase.builder()
                 .member(member)
-                .title(purchaseRequest.getTitle())
-                .author(purchaseRequest.getAuthor())
-                .publisher(purchaseRequest.getPublisher())
-                .publicationYear(purchaseRequest.getPublicationYear())
+                .title(purchaseDto.getTitle())
+                .author(purchaseDto.getAuthor())
+                .publisher(purchaseDto.getPublisher())
+                .publicationYear(purchaseDto.getPublicationYear())
                 .requestDate(LocalDate.now().toString())
                 .dateOfProcess("")
-                .processResult(ProcessResult.신청)
+                .processResult(ProcessResult.APPLY)
                 .build();
     }
 
-    public void update(String dateOfProcess, ProcessResult processResult) {
+    public void update(String dateOfProcess, String processResult) {
         this.dateOfProcess = dateOfProcess;
-        this.processResult = processResult;
+        this.processResult = ProcessResult.from(processResult);
     }
 }

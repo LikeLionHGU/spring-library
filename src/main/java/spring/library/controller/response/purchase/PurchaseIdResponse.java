@@ -1,8 +1,8 @@
-package spring.library.dto.response.purchase;
+package spring.library.controller.response.purchase;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.library.dto.response.ApiResponse;
+import spring.library.controller.response.ApiResponse;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
