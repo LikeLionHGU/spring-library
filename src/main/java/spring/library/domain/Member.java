@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.library.dto.request.MemberRequest;
+import spring.library.controller.request.MemberRequest;
+import spring.library.dto.MemberDto;
 
 @Entity
 @Builder
@@ -32,21 +33,21 @@ public class Member extends BaseEntity{
     @Column(nullable = false)
     private String phoneNumber;
 
-    public void update(MemberRequest memberRequest) {
-        this.name = memberRequest.getName();
-        this.email = memberRequest.getEmail();
-        this.idNumber = memberRequest.getIdNumber();
-        this.feature = memberRequest.getFeature();
-        this.phoneNumber = memberRequest.getPhoneNumber();
+    public void update(MemberDto memberDto) {
+        this.name = memberDto.getName();
+        this.email = memberDto.getEmail();
+        this.idNumber = memberDto.getIdNumber();
+        this.feature = Feature.from(memberDto.getFeature());
+        this.phoneNumber = memberDto.getPhoneNumber();
     }
 
-    public static Member toMember(MemberRequest memberRequest) {
+    public static Member from(MemberDto memberDto) {
         return Member.builder()
-                .name(memberRequest.getName())
-                .email(memberRequest.getEmail())
-                .idNumber(memberRequest.getIdNumber())
-                .feature(memberRequest.getFeature())
-                .phoneNumber(memberRequest.getPhoneNumber())
+                .name(memberDto.getName())
+                .email(memberDto.getEmail())
+                .idNumber(memberDto.getIdNumber())
+                .feature(Feature.from(memberDto.getFeature()))
+                .phoneNumber(memberDto.getPhoneNumber())
                 .build();
     }
 }
