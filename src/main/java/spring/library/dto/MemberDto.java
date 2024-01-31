@@ -8,6 +8,7 @@ import spring.library.domain.Book;
 import spring.library.domain.Member;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //@Builder
 @Getter
@@ -23,22 +24,18 @@ public class MemberDto {
 	private String email;
 	private String phoneNumber;
 
-	// todo : 대여 기능 구현
+	public List<Book> rentalHistory;
 
-	public ArrayList<Book> rentalHistory = new ArrayList<>();
-
-	// 여기
-
-
-	public static MemberDto from(Member ordinary){
+	public static MemberDto from(Member member){
     return MemberDto.builder()
-        .memberId(ordinary.getMemberId())
-        .name(ordinary.getName())
-        .idNumber(ordinary.getIdNumber())
-        .feature(ordinary.getFeature())
-        .email(ordinary.getEmail())
-        .phoneNumber(ordinary.getPhoneNumber())
-        .build();
+        .memberId(member.getMemberId())
+        .name(member.getName())
+        .idNumber(member.getIdNumber())
+        .feature(member.getFeature())
+        .email(member.getEmail())
+        .phoneNumber(member.getPhoneNumber())
+//	    .rentalHistory(member.rentalHistory)
+	    .build();
 	}
 
 	public MemberDto(Member member){

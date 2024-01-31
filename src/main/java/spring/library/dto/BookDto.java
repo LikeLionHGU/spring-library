@@ -23,20 +23,7 @@ public class BookDto {
 
 	private String classification;
 
-//	private String status;  // 대출 가능 | 불가능
-
 	private Long bookId;
-
-
-	// todo : 대출 관련
-
-	private String checkOutDate;
-	private String dueDate;
-	private int renewalCount;
-
-
-
-	// 여기까지
 
 
 	public BookDto(Book book){
@@ -45,7 +32,6 @@ public class BookDto {
 		publisher = book.getPublisher();
 		publicationYear = book.getPublicationYear();
 		classification = book.getClassification();
-//		status = book.getStatus();
 		bookId = book.getBookId();
 	}
 
@@ -57,7 +43,6 @@ public class BookDto {
 			.publisher(book.getPublisher())
 			.publicationYear(book.getPublicationYear())
 			.classification(book.getClassification())
-//			.status(book.getStatus())
 			.bookId(book.getBookId())
 			.build();
 	}

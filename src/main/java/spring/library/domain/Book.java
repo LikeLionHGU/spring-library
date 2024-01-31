@@ -1,12 +1,17 @@
 package spring.library.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Null;
 import lombok.*;
 import spring.library.dto.BookDto;
+import spring.library.dto.RentalManagementDto;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter
+@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
@@ -26,27 +31,15 @@ public class Book {
 	@Column(nullable = false)
 	private String classification;
 
-	// todo: 대출 관련
-	@Column
-	private String checkOutDate;
-
-	@Column
-	private String dueDate;
-
-	@Column
-	private int renewalCount;
-
-	// 여기까지
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "book_id")
 	private Long bookId;
 
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
-	private Member oridinary;
+	private Member member;
 
 
 	public void update(String title, String author, String publisher, int publicationYear, String classification){
@@ -57,29 +50,30 @@ public class Book {
 		this.classification = classification;
 	}
 
-
-	public static Book toBookByBookDto(BookDto bookDto){      // -> 이것일 경우, method 넣는 걸로.
-    return Book.builder()
+	public static Book toBookByBookDto(BookDto bookDto){
+    return spring.library.domain.Book.builder()
         .title(bookDto.getTitle())
         .author(bookDto.getAuthor())
         .publisher(bookDto.getPublisher())
         .publicationYear(bookDto.getPublicationYear())
         .classification(bookDto.getClassification())
-//        .status(bookDto.getStatus())
 	    .bookId(bookDto.getBookId())
         .build();
 	}
 
-	public static Book toBookByOrdinary(BookDto bookDto, Member ordinary){
-		return Book.builder()
-			.title(bookDto.getTitle())
-			.author(bookDto.getAuthor())
-			.publisher(bookDto.getPublisher())
-			.publicationYear(bookDto.getPublicationYear())
-			.classification(bookDto.getClassification())
-//			.status(bookDto.getStatus())
-			.bookId(bookDto.getBookId())
-			.oridinary(ordinary)
-			.build();
+	public static List<Book> toBookByMember(Member member, List<BookDto> list_BookDto){
+		List<Book> books = new ArrayList<>();
+		for(BookDto bookDto : list_BookDto) {
+			books.add(spring.library.domain.Book.builder()
+				.title(bookDto.getTitle())
+				.author(bookDto.getAuthor())
+				.publisher(bookDto.getPublisher())
+				.publicationYear(bookDto.getPublicationYear())
+				.classification(bookDto.getClassification())
+				.bookId(bookDto.getBookId())
+				.build());
+		}
+		return books;
 	}
+
 }

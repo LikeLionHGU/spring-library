@@ -10,8 +10,8 @@ import spring.library.service.MemberToBookService;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor    // 일단은 final이 붙은 것만 생성자로 만듦.
-@CrossOrigin    // controller에선 거진 필수!
+@RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("/books")
 public class MemberToBookController {
 
@@ -28,16 +28,6 @@ public class MemberToBookController {
 		List<Book> books = masterToBookService.findAll();
 		return ResponseEntity.ok().body(books);
 	}
-
-//	질문하기 -> 위 아래 모두 동일한 역할을 해. 그런데, type에 Book / BookDto 이 차이 뿐인데, 무엇으로 하는 게 더 좋은 걸까?
-
-//	@GetMapping
-//	public ResponseEntity<List<BookDto>> findAllBooks(){
-//		List<BookDto> books = masterToBookService.findAll()
-//			.stream()
-//			.map(BookDto::new)
-//			.toList();
-//		return ResponseEntity.ok().body(books);
 
 	@PatchMapping("/{bookId}")
 	public ResponseEntity<Book> updateBook

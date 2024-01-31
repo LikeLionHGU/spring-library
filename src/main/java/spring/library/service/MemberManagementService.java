@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import spring.library.domain.Member;
 import spring.library.dto.MemberDto;
 import spring.library.repository.MemberRepository;
-
 import java.util.List;
 
 @Service
@@ -18,7 +17,7 @@ public class MemberManagementService {
 
 	// todo: 관리자가 회원 등록하는 것
 	public Member save(MemberDto memberDto){
-		return memberRepository.save(Member.toOrdinary(memberDto));
+		return memberRepository.save(Member.toMember(memberDto));
 	}
 
 	// todo: 관리자가 등록된 회원 목록 조회하는 것

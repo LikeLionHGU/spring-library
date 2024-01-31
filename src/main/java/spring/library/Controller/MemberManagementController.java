@@ -10,8 +10,8 @@ import spring.library.service.MemberManagementService;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor    // 일단은 final이 붙은 것만 생성자로 만듦.
-@CrossOrigin    // controller에선 거진 필수!
+@RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("/members")
 public class MemberManagementController {
 
