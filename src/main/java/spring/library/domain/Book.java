@@ -32,13 +32,11 @@ public class Book {
   private int amount;
 
 
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "memberId")
   private Member member;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "borrowDate")
-  private History history;
 
 
 
@@ -54,4 +52,7 @@ public class Book {
         .amount(bookDto.getAmount())
         .build();
   }
+
+
+
 }

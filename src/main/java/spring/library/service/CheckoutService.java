@@ -18,6 +18,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -67,10 +68,12 @@ public class CheckoutService {
 
       member.setNumberBooks(member.getNumberBooks() + 1);
       book.get().setStatus("대출중");
+      history.setDue(LocalDate.now().plusDays(duration));
+
+
       bookRepository.save(book.get());
       memberRepository.save(member);
 
-      history.setDue(LocalDate.now().plusDays(duration));
       historyRepository.save(history);
 
 
@@ -99,12 +102,11 @@ public class CheckoutService {
   // 3) List로 리턴
 
   public List<BookDto> getBookHistory(Long memberId){
-    List<Book> books = historyRepository.findAllByMember(memberId);
+    List<History> histories = historyRepository.findAllByMember(memberId);
+    List<Book> books = histories.stream().map(History::getBook).toList();
 
     return books.stream().map(BookDto::from).toList();
   }
-
-
 
 
   // To-Do

@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
-    @Query("select h from History h join fetch h.member where h.member.memberId = :memberId")
-    List<Book> findAllByMember(Long memberId);
+    @Query("select h from History h where h.member.memberId = :memberId")
+    List<History> findAllByMember(Long memberId);
 
 
 
