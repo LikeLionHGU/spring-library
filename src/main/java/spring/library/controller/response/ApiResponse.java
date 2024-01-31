@@ -1,4 +1,4 @@
-package spring.library.dto.response;
+package spring.library.controller.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
