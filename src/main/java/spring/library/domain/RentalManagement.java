@@ -3,6 +3,7 @@ package spring.library.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -76,6 +77,16 @@ public class RentalManagement {
 	public static RentalManagement ReturnBookToRentalManagerment(Book book){
 		RentalManagement rentalManagement = new RentalManagement(book, null, null, 0, true, "대출 가능", null);
 		return rentalManagement;
+	}
+
+	public static LocalDate updateDueDate(RentalManagement rentalManagement){
+		String newDueDate = rentalManagement.getDueDate();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate date = LocalDate.parse(newDueDate, formatter);
+		LocalDate newDate = date.plusDays(5); // 5일을 더합니다.
+		return newDate;
+
 	}
 
 }

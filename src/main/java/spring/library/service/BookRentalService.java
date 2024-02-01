@@ -10,8 +10,11 @@ import spring.library.repository.BookHistoryRepository;
 import spring.library.repository.BookRepository;
 import spring.library.repository.MemberRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static spring.library.domain.RentalManagement.updateDueDate;
 
 @Service
 @CrossOrigin
@@ -85,7 +88,19 @@ public class BookRentalService {
 		RentalManagement rentalManagement = RentalManagement.ReturnBookToRentalManagerment(rentedBook);
 		RentalManagement savedRentalManagement = bookHistoryRepository.save(rentalManagement);
 		return savedRentalManagement;
-
 	}
+
+	public RentalManagement prolongPeriod(Long rentMemberId){
+		// todo : 현재 날짜가 반납 날짜와 동일하다면, 다음 과정 실행. 아니면 예외처리
+
+		Book rentedBook = bookRepository.findById(rentMemberId).orElseThrow( () -> new IllegalArgumentException("대출한 도서를 찾지 못했습니다! returnBookToLibrary 확인해주세요."));
+		List<RentalManagement> targetBook = bookHistoryRepository.findByRentMemberId(rentMemberId);
+		RentalManagement recentOfTargetBook = targetBook.get(targetBook.size() - 1);
+		LocalDate localDate = updateDueDate(recentOfTargetBook);
+		recentOfTargetBook.setDueDate(String.valueOf(localDate));
+		RentalManagement updatedRentalManagement = bookHistoryRepository.save(recentOfTargetBook);
+		return updatedRentalManagement;
+	}
+
 
 }

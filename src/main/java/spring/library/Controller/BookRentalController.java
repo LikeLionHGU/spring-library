@@ -42,5 +42,10 @@ public class BookRentalController {
 		return ResponseEntity.ok().body(rentalManagement);
 	}
 
-//	/checkouts/{checkOutId}/return
+	@PatchMapping("/checkouts/{checkOutId}/renewal")
+	public ResponseEntity<RentalManagement> prolongPeriod(@PathVariable Long checkOutId){
+		RentalManagement rentalManagement = bookRentalService.prolongPeriod(checkOutId);
+		return  ResponseEntity.ok().body(rentalManagement);
+	}
+
 }
