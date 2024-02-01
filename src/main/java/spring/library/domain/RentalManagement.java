@@ -80,11 +80,18 @@ public class RentalManagement {
 	}
 
 	public static LocalDate updateDueDate(RentalManagement rentalManagement){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		LocalDateTime todayDate = LocalDateTime.now();
+		String today = todayDate.format(formatter);
+
 		String newDueDate = rentalManagement.getDueDate();
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		if(today.equals(newDueDate) == false) throw new IllegalArgumentException("오늘은 반납 날짜가 아닙니다.");
+
 		LocalDate date = LocalDate.parse(newDueDate, formatter);
-		LocalDate newDate = date.plusDays(5); // 5일을 더합니다.
+
+		LocalDate newDate = date.plusDays(5);
 		return newDate;
 
 	}
