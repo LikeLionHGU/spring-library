@@ -39,3 +39,4 @@ out/
 ### Spring Boot ###
 application*.yml
 application*.properties
+.DS_Store
